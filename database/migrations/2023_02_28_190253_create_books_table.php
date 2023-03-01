@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('author_name');
             $table->text('title');
             $table->string('price');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

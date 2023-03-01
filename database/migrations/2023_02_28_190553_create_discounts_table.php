@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
+            $table->text('name');
+            $table->double('amount');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
