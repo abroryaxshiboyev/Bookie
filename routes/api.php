@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('category',[CategoryController::class],'store');
+Route::post('category',[CategoryController::class,'store']);
