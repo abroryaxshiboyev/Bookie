@@ -22,7 +22,7 @@ class AuthController extends Controller
             'phone' =>$request->phone,
             'password' =>Hash::make($request->password)
         ]);
-
+        $user->assignRole('user');
         return response()->json([
             'message' =>'Registration successful',
             'data' =>$user
@@ -46,9 +46,10 @@ class AuthController extends Controller
             'message' => 'success',
             'data'=>[
                 'user' => [
-                    'id' => $request->user()->id,
-                    'name' => $request->user()->name,
-                    'phone' => $request->user()->phone
+                    // 'id' => $request->user()->id,
+                    // 'name' => $request->user()->name,
+                    // 'phone' => $request->user()->phone
+                    $request->user()->photos[0]
                 ]
             ]
         ]);

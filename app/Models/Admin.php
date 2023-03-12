@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Admin extends Model
 {
     use HasFactory;
-    
-    protected $fillable = [
-        'url',
-    ];
 
-    public function imageable(){
-        return $this->morphTo();
-    }
+    protected $fillable = [
+        'user_id',
+    ];
 }

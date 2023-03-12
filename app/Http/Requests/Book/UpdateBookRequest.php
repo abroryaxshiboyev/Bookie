@@ -24,7 +24,11 @@ class UpdateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'categories_id'=>'exists:categories,id',
+            'name'=>'string',
+            'author_name'=>'string',
+            'title'=>'string',
+            'price'=>'string',
         ];
     }
 }
