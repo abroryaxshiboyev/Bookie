@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Favorite;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class OneFavoriteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,11 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'phone'=>$this->phone,
-            'image'=>$this->photo,
+            'id'=>$this->book->id,
+            'name'=>$this->book->name,
+            'author_name'=>$this->book->author_name,
+            'title'=>$this->book->title,
+            'price'=>$this->book->price,
         ];
     }
 }

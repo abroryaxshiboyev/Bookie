@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Category;
 
+use App\Http\Resources\Book\OneBookResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OneCategoryResource extends JsonResource
@@ -16,7 +17,8 @@ class OneCategoryResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name
+            'name'=>$this->name,
+            'books'=>CategoryBookResource::collection($this->books),
         ];
     }
 }

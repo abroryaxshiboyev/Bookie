@@ -16,6 +16,6 @@ class Category extends Model
 
     public function books()
     {
-        return $this->belongsToMany(Word::class,'category_books');
+        return $this->belongsToMany(Book::class,'category_books');
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('category_books', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class)->constrained();
+            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Book::class)->constrained();
             $table->softDeletes();
             $table->timestamps();

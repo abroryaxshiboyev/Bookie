@@ -21,7 +21,8 @@ class OneBookResource extends JsonResource
             'author_name'=>$this->author_name,
             'title'=>$this->title,
             'price'=>$this->price,
-            'categories'=>OneCategoryResource::collection($this->categories),
+            'categories'=>BookCategoryResource::collection($this->categories),
+            'image'=>$this->photo->file,
         ];
     }
 }

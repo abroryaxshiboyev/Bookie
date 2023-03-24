@@ -74,7 +74,7 @@ class CategoryController extends Controller
     {
         $category=Category::find($id);
         if ($category) {
-            $category_update=$category->update($request->validated());
+            $category->update($request->validated());
             $category=Category::find($id);
             return response([
                 'message'=>'category updated succsesfull',
@@ -99,7 +99,7 @@ class CategoryController extends Controller
         $category=Category::find($id);
         if($category)
         {
-            $category->forceDelete();
+            $category->delete();
             return response([
                'message'=>'category deleted'
             ]);

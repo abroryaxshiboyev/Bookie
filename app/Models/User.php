@@ -45,7 +45,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function photos(){
-        return $this->morphMany(Image::class,'imageable');
+    public function photo(){
+        return $this->morphOne(Image::class,'imageable');
+    }
+    public function books(){
+        return $this->belongsToMany(Book::class,'orders')->as('orders');
     }
 }

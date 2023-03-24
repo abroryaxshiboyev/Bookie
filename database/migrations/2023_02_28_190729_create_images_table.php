@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->morphs('imageable');
-            $table->text('url');
+            $table->text('imageable_type')->nullable();
+            $table->bigInteger('imageable_id')->nullable();
+            $table->text('file');
             $table->softDeletes();
             $table->timestamps();
         });

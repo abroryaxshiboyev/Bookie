@@ -46,10 +46,11 @@ class AuthController extends Controller
             'message' => 'success',
             'data'=>[
                 'user' => [
-                    // 'id' => $request->user()->id,
-                    // 'name' => $request->user()->name,
-                    // 'phone' => $request->user()->phone
-                    $request->user()->photos[0]
+                    'id' => $request->user()->id,
+                    'name' => $request->user()->name,
+                    'phone' => $request->user()->phone,
+                    'image' => $request->user()->photo
+                    // $request->user()->photos[0]
                 ]
             ]
         ]);

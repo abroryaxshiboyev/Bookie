@@ -10,10 +10,19 @@ class Image extends Model
     use HasFactory;
     
     protected $fillable = [
-        'url',
+        'folder',
+        'file'
     ];
 
-    public function imageable(){
-        return $this->morphTo();
-    }
+    protected $path = '/storage/images/';
+
+public function getFileAttribute($file) {
+
+    return $this->path . $file;
+
+}
+
+public function imageable() {
+    return $this->morphTo();
+}
 }

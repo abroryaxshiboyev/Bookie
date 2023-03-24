@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\api\v1\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Book\StoreBookRequest;
-use App\Http\Requests\Book\UpdateBookRequest;
-use App\Http\Resources\Book\OneBookResource;
-use App\Models\Book;
-use App\Models\Category;
-use App\Models\CategoryBook;
+use App\Http\Requests\DubAuthor\StoreDubAuthorRequest;
+use App\Http\Requests\DubAuthor\UpdateDubAuthorRequest;
+use App\Http\Resources\DubAuthor\OneDubAuthorResource;
+use App\Models\Dubauthor;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class DubAuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +18,10 @@ class BookController extends Controller
      */
     public function index(Request $r)
     {
-        $book=Book::paginate($r->input('limit'));
+        $dubauthor=Dubauthor::paginate($r->input('limit'));
         return response([
-            'message'=>"all books",
-            'data'=>OneBookResource::collection($book)
+            'message'=>"all DubAuthors",
+            'data'=>OneDubAuthorResource::collection($dubauthor)
         ]);
     }
 
@@ -33,14 +31,12 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBookRequest $request)
+    public function store(StoreDubAuthorRequest $request)
     {
-        $book=Book::create($request->validated());
-        $book=Book::find($book->id);
-        $book->categories()->sync([$request['categories_id']]);
+        $book=Dubauthor::create($request->validated());
         return response([
-            'message'=>"created book",
-            'data'=>new OneBookResource($book)
+            'message'=>"created DubAuthor",
+            'data'=>new OneDubAuthorResource($book)
         ], 201);
     }
 
@@ -52,12 +48,12 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book=Book::find($id);
-        if(isset($book))
+        $dubauthor=Dubauthor::find($id);
+        if(isset($dubauthor))
         {
             return response([
-                'message'=>'one category',
-                'data'=>new OneBookResource($book)
+                'message'=>'one DubAuthor',
+                'data'=>new OneDubAuthorResource($dubauthor)
             ]);
         }
         else {
@@ -74,16 +70,15 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBookRequest $request, $id)
+    public function update(UpdateDubAuthorRequest $request, $id)
     {
-        $book=Book::find($id);
-        if ($book) {
-            $book->update($request->validated());
-            $book=Book::find($id);
-            $book->categories()->sync([$request['categories_id']]);
+        $category=Dubauthor::find($id);
+        if ($category) {
+            $category->update($request->validated());
+            $category=Dubauthor::find($id);
             return response([
-                'message'=>'book updated succsesfull',
-                'data'=>new OneBookResource($book)
+                'message'=>'DubAuthor updated succsesfull',
+                'data'=>new OneDubAuthorResource($category)
             ]);
         } else {
             return response([
@@ -100,13 +95,12 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book=Book::find($id);
-        if(isset($book))
+        $dubauthor=Dubauthor::find($id);
+        if($dubauthor)
         {
-            CategoryBook::where('book_id',$id)->delete();
-            $book->delete();
+            $dubauthor->delete();
             return response([
-               'message'=>'book deleted'
+               'message'=>'dubauthor deleted'
             ]);
         }
         else {

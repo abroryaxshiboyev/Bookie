@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Book::class)->constrained();
-            $table->boolean('status');
+            $table->boolean('status')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -3,7 +3,11 @@
 use App\Http\Controllers\api\v1\admin\AuthController;
 use App\Http\Controllers\api\v1\admin\BookController;
 use App\Http\Controllers\api\v1\admin\CategoryController;
+use App\Http\Controllers\api\v1\admin\DubAuthorController;
 use App\Http\Controllers\api\v1\admin\ImageController;
+use App\Http\Controllers\api\v1\admin\OrderController;
+use App\Http\Controllers\api\v1\user\BasketController;
+use App\Http\Controllers\api\v1\user\FavoriteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +39,31 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('book',[BookController::class,'store'])->can('book create');
     Route::put('book/{id}',[BookController::class,'update'])->can('book update');
     Route::delete('book/{id}',[BookController::class,'destroy'])->can('book delete');
+
+    //DubAuthor
+    Route::post('dubauthor',[DubAuthorController::class,'store'])->can('dubauthor create');
+    Route::put('dubauthor/{id}',[DubAuthorController::class,'update'])->can('dubauthor update');
+    Route::delete('dubauthor/{id}',[DubAuthorController::class,'destroy'])->can('dubauthor delete');
+
+    //Basket
+    Route::post('basket',[BasketController::class,'store']);
+    Route::delete('basket/{id}',[BasketController::class,'destroy']);
+    Route::get('basket',[BasketController::class,'index']);
+
+     //Favorite
+     Route::post('favorite',[FavoriteController::class,'store']);
+     Route::delete('favorite/{id}',[FavoriteController::class,'destroy']);
+     Route::get('favorite',[FavoriteController::class,'index']);
+
+    //Order
+    Route::post('order',[OrderController::class,'store']);
+    Route::delete('order/{id}',[OrderController::class,'destroy']);
+    Route::put('order/{id}',[OrderController::class,'update']);
+
+    Route::get('order',[OrderController::class,'index']);
+
+    //Image
+    Route::post('upload',[ImageController::class,'store']);
     
 });
 
@@ -50,6 +79,11 @@ Route::get('category/{id}',[CategoryController::class,'show']);
 //Book
 Route::get('book',[BookController::class,'index']);
 Route::get('book/{id}',[BookController::class,'show']);
+
+//DubAuthor
+Route::get('dubauthor',[DubAuthorController::class,'index']);
+Route::get('dubauthor/{id}',[DubAuthorController::class,'show']);
+
 
 //upload image
 
