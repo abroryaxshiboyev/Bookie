@@ -33,8 +33,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('logout',[AuthController::class,'logout']);
 
     //Admin
-    Route::post('admin',[AdminController::class,'store']);
-    Route::delete('admin/{id}',[AdminController::class,'destroy']);
+    Route::post('admin',[AdminController::class,'store'])->can('admin create');
+    Route::delete('admin/{id}',[AdminController::class,'destroy'])->can('admin delete');;
 
     //Category
     Route::post('category',[CategoryController::class,'store'])->can('category create');
@@ -68,8 +68,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     //Order
     Route::post('order',[OrderController::class,'store']);
-    Route::delete('order/{id}',[OrderController::class,'destroy']);
-    Route::put('order/{id}',[OrderController::class,'update']);
+    Route::delete('order/{id}',[OrderController::class,'destroy'])->can('order update');
+    Route::put('order/{id}',[OrderController::class,'update'])->can('order update');
 
     Route::get('order',[OrderController::class,'index']);
 
