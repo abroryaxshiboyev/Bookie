@@ -87,6 +87,11 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name'=>'discbook update']);
         Permission::create(['name'=>'discbook delete']);
 
+        //Audio
+        Permission::create(['name'=>'audio create']);
+        Permission::create(['name'=>'audio update']);
+        Permission::create(['name'=>'audio delete']);
+
         $admin->syncPermissions(Permission::all());
 
         //Admin

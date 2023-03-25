@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Book;
+namespace App\Http\Requests\Audio;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBookRequest extends FormRequest
+class StoreAudioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,10 @@ class UpdateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'categories_id'=>'exists:categories,id',
-            'name'=>'string',
-            'author_name'=>'string',
-            'title'=>'string',
-            'price'=>'string',
-            'image'=>'nullable|mimes:jpeg,jpg,png,gif'
+            'name'=>'required|string',
+            'book_id'=>'required|exists:books,id',
+            'dubauthor_id'=>'required|exists:dubauthors,id',
+            'audio'=>'required|mimes:ogg,mp3,wav'
         ];
     }
 }

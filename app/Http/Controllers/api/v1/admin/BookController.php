@@ -35,9 +35,19 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $book=Book::create($request->validated());
+        $b=false;
+        if ($file = $request->file('image')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->storeAs('public/images/', $name); 
+            $b=true; 
+        }
+        $result=$request->validated();
+        if($b)
+            $result['image']=$name;
+        $book=Book::create($result);
         $book=Book::find($book->id);
         $book->categories()->sync([$request['categories_id']]);
+        
         return response([
             'message'=>"created book",
             'data'=>new OneBookResource($book)
@@ -76,11 +86,22 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, $id)
     {
+
         $book=Book::find($id);
         if ($book) {
-            $book->update($request->validated());
+            $b=false;
+            if ($file = $request->file('image')) {
+                $name = time() . $file->getClientOriginalName();
+                $file->storeAs('public/images/', $name);  
+                $b=true;
+            }
+            $result=$request->validated();
+            if($b)
+                $result['image'] = $name;
+            $book->update($result);
             $book=Book::find($id);
-            $book->categories()->sync([$request['categories_id']]);
+            if(isset($request['categories_id']))
+                $book->categories()->sync([$request['categories_id']]);
             return response([
                 'message'=>'book updated succsesfull',
                 'data'=>new OneBookResource($book)

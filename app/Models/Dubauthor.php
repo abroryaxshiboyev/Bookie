@@ -12,4 +12,9 @@ class Dubauthor extends Model
     protected $fillable=[
         'name',
     ];
+
+    public function audios()
+    {
+        return $this->hasMany(Audio::class);
+    }
 }

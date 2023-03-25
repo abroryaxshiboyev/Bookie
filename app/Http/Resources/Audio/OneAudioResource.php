@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Audio;
 
+use App\Http\Resources\Book\BookCategoryResource;
+use App\Http\Resources\DubAuthor\OneDubAuthorResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class OneAudioResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +17,10 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
             'name'=>$this->name,
-            'phone'=>$this->phone,
-            'image'=>$this->photo,
-            'role'=>$this->roles[0]->name
+            'url'=>$this->url,
+            'book'=>new AudiBookResource($this->book),
+            'dubauthor'=>new AudiDubAuthorResource($this->dubauthor),
         ];
     }
 }

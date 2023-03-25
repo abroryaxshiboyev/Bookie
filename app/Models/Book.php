@@ -15,6 +15,7 @@ class Book extends Model
         'author_name',
         'title',
         'price',
+        'image'
     ];
 
     public function categories()
@@ -28,6 +29,11 @@ class Book extends Model
 
     public function photo(){
         return $this->morphOne(Image::class,'imageable');
+    }
+
+    public function audios()
+    {
+        return $this->hasMany(Audio::class);
     }
 
 }

@@ -17,6 +17,11 @@ class BasketController extends Controller
     public function store(StoreBasketRequest $r){
         $user_id=auth()->user()->id;
         $r->validated();
+        $count=count(Basket::where('user_id',$user_id)->where('book_id',$r->book_id)->get());
+        if($count)
+            return response([
+                'message' =>'this book is in the cart'
+            ],404);
         $basket=Basket::create([
             'book_id'=>$r->book_id,
             'user_id'=>$user_id

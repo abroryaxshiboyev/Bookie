@@ -11,19 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class ImageController extends Controller
 {
     public function store(Request $request){
-        // if($request->hasFile('avatar')){
-        //     $file=$request->file('avatar');
-        //     $filename=$file->getClientOriginalName();
-        //     $folder=uniqid().'-'.now()->timestamp;
-        //     $file->storeAs('avatars/'.$folder,$filename);
-            
-        //     Image::create([
-        //         'filename' => $filename,
-        //         'folder' => $folder
-        //     ]);
-        // }
-        // return 'err';
-
+    
         $user = Auth::user();
         if(isset($request->book_id))
             $user=Book::find($request->book_id);

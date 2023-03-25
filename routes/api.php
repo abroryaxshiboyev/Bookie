@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\v1\admin\AdminController;
+use App\Http\Controllers\api\v1\admin\AudioController;
 use App\Http\Controllers\api\v1\admin\AuthController;
 use App\Http\Controllers\api\v1\admin\BookController;
 use App\Http\Controllers\api\v1\admin\CategoryController;
@@ -30,6 +32,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('check',[AuthController::class,'check']);
     Route::post('logout',[AuthController::class,'logout']);
 
+    //Admin
+    Route::post('admin',[AdminController::class,'store']);
+    Route::delete('admin/{id}',[AdminController::class,'destroy']);
+
     //Category
     Route::post('category',[CategoryController::class,'store'])->can('category create');
     Route::put('category/{id}',[CategoryController::class,'update'])->can('category update');
@@ -44,6 +50,11 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('dubauthor',[DubAuthorController::class,'store'])->can('dubauthor create');
     Route::put('dubauthor/{id}',[DubAuthorController::class,'update'])->can('dubauthor update');
     Route::delete('dubauthor/{id}',[DubAuthorController::class,'destroy'])->can('dubauthor delete');
+
+    //Audio
+    Route::post('audio',[AudioController::class,'store'])->can('audio create');
+    Route::put('audio/{id}',[AudioController::class,'update'])->can('audio update');
+    Route::delete('audio/{id}',[AudioController::class,'destroy'])->can('audio delete');
 
     //Basket
     Route::post('basket',[BasketController::class,'store']);

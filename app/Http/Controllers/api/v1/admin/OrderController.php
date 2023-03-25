@@ -66,6 +66,9 @@ class OrderController extends Controller
    
     public function destroy($id)
     {
-        //
+        Order::where('user_id',$id)->where('status',false)->delete();
+        return response([
+            'message'=>"deleted"
+         ]);
     }
 }

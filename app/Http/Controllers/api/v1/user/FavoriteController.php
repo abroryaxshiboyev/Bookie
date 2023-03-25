@@ -13,6 +13,11 @@ class FavoriteController extends Controller
     public function store(StoreBasketRequest $r){
         $user_id=auth()->user()->id;
         $r->validated();
+        $count=count(Favorite::where('user_id',$user_id)->where('book_id',$r->book_id)->get());
+        if($count)
+            return response([
+                'message' =>'this book is in favorites'
+            ],404);
         $basket=Favorite::create([
             'book_id'=>$r->book_id,
             'user_id'=>$user_id
