@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('admin_id')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Book::class)->constrained();
             $table->boolean('status')->default(false);

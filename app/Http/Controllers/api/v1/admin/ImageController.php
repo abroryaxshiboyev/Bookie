@@ -13,8 +13,7 @@ class ImageController extends Controller
     public function store(Request $request){
     
         $user = Auth::user();
-        if(isset($request->book_id))
-            $user=Book::find($request->book_id);
+        
         if ($file = $request->file('photo_id')) {
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Book;
+namespace App\Http\Requests\Review;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBookRequest extends FormRequest
+class UpdateReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateBookRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,12 +24,7 @@ class UpdateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'categories_id'=>'exists:categories,id',
-            'name'=>'string',
-            'author_name'=>'string',
-            'title'=>'string',
-            'price'=>'integer',
-            'image'=>'nullable|mimes:jpeg,jpg,png,gif'
+            //
         ];
     }
 }

@@ -55,12 +55,19 @@ class OrderController extends Controller
    
     public function update( $id)
     {
-        $orders=Order::where('user_id',$id)->where('status',false)->update([
-            'status'=>true
-        ]);
-        return response([
-           'message'=>"updated"
-        ]);
+        $orders=Order::where('user_id',$id)->where('status',false);
+        if(count($orders->get())){
+            $orders->update([
+                'status'=>true
+            ]);
+            return response([
+            'message'=>"updated"
+            ]);
+        }else {
+            return response([
+                'message'=>'id not found'
+            ]);
+        }
     }
 
    

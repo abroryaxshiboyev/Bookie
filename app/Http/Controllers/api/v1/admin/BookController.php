@@ -86,7 +86,6 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, $id)
     {
-
         $book=Book::find($id);
         if ($book) {
             $b=false;
@@ -99,7 +98,6 @@ class BookController extends Controller
             if($b)
                 $result['image'] = $name;
             $book->update($result);
-            $book=Book::find($id);
             if(isset($request['categories_id']))
                 $book->categories()->sync([$request['categories_id']]);
             return response([

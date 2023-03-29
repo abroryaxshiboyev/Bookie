@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('author_name');
             $table->text('title');
-            $table->string('price');
+            $table->biginteger('price');
             $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();

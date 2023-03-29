@@ -8,6 +8,7 @@ use App\Http\Controllers\api\v1\admin\CategoryController;
 use App\Http\Controllers\api\v1\admin\DubAuthorController;
 use App\Http\Controllers\api\v1\admin\ImageController;
 use App\Http\Controllers\api\v1\admin\OrderController;
+use App\Http\Controllers\api\v1\admin\ReviewController;
 use App\Http\Controllers\api\v1\user\BasketController;
 use App\Http\Controllers\api\v1\user\FavoriteController;
 use Illuminate\Http\Request;
@@ -71,7 +72,12 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('order/{id}',[OrderController::class,'destroy'])->can('order update');
     Route::put('order/{id}',[OrderController::class,'update'])->can('order update');
 
-    Route::get('order',[OrderController::class,'index']);
+    //Review
+    Route::post('review',[ReviewController::class,'store']);
+    Route::delete('review/{id}',[ReviewController::class,'destroy']);
+    Route::put('review/{id}',[ReviewController::class,'update']);
+
+    Route::get('order',[OrderController::class,'index'])->can('order view');
 
     //Image
     Route::post('upload',[ImageController::class,'store']);
