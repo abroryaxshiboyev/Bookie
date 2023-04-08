@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\api\v1\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Book;
-use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ImageController extends Controller
+class UserController extends Controller
 {
-    public function store(Request $request){
-    
+    public function storeImage(Request $request){
+
         $user = Auth::user();
         
-        if ($file = $request->file('photo_id')) {
+        if ($file = $request->file('image')) {
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();
             $file->storeAs('public/images/', $name);

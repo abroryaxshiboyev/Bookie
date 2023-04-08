@@ -15,7 +15,6 @@ class Book extends Model
         'author_name',
         'title',
         'price',
-        'image'
     ];
 
     public function categories()

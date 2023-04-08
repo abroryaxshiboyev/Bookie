@@ -10,6 +10,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\CategoryBook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -42,10 +43,12 @@ class BookController extends Controller
             $b=true; 
         }
         $result=$request->validated();
-        if($b)
-            $result['image']=$name;
         $book=Book::create($result);
         $book=Book::find($book->id);
+        if($b)
+            $book->photo()->create([
+                'file'=>$name,
+            ]);
         $book->categories()->sync([$request['categories_id']]);
         
         return response([
@@ -96,7 +99,13 @@ class BookController extends Controller
             }
             $result=$request->validated();
             if($b)
-                $result['image'] = $name;
+            {
+                Storage::delete("public/images/".$book->photo->file);
+                $book->photo()->delete();
+                $book->photo()->create([
+                    'file'=>$name,
+                ]);
+            }
             $book->update($result);
             if(isset($request['categories_id']))
                 $book->categories()->sync([$request['categories_id']]);

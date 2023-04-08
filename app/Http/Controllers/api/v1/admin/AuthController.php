@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CheckUserRequest;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\UserRoleResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class AuthController extends Controller
         $user->assignRole('user');
         return response()->json([
             'message' =>'Registration successful',
-            'data' =>$user
+            'data' =>new UserResource($user)
         ],200);
     }
     public function login(CheckUserRequest $request){
@@ -42,17 +43,10 @@ class AuthController extends Controller
     } 
     public function check(Request $request)
     {
+     
         return response([
             'message' => 'success',
-            'data'=>[
-                'user' => [
-                    'id' => $request->user()->id,
-                    'name' => $request->user()->name,
-                    'phone' => $request->user()->phone,
-                    'image' => $request->user()->photo
-                    // $request->user()->photos[0]
-                ]
-            ]
+            'data'=>new UserResource($request->user())
         ]);
     }
     public function logout(Request $request)

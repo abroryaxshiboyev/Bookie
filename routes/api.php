@@ -9,6 +9,7 @@ use App\Http\Controllers\api\v1\admin\DubAuthorController;
 use App\Http\Controllers\api\v1\admin\ImageController;
 use App\Http\Controllers\api\v1\admin\OrderController;
 use App\Http\Controllers\api\v1\admin\ReviewController;
+use App\Http\Controllers\api\v1\admin\UserController;
 use App\Http\Controllers\api\v1\user\BasketController;
 use App\Http\Controllers\api\v1\user\FavoriteController;
 use Illuminate\Http\Request;
@@ -32,6 +33,9 @@ Route::middleware('auth:sanctum')->group(function(){
     //Auth
     Route::get('check',[AuthController::class,'check']);
     Route::post('logout',[AuthController::class,'logout']);
+
+    //userEdit
+    Route::post('userimage',[UserController::class,'storeImage']);
 
     //Admin
     Route::post('admin',[AdminController::class,'store'])->can('admin create');

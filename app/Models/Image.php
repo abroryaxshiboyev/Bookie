@@ -14,13 +14,8 @@ class Image extends Model
         'file'
     ];
 
-    protected $path = '/storage/images/';
 
-public function getFileAttribute($file) {
 
-    return $this->path . $file;
-
-}
 
 public function imageable() {
     return $this->morphTo();
