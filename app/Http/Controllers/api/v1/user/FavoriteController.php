@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
+    public function index(){
+        $user_id=auth()->user()->id;
+        $baskets=Favorite::where('user_id',$user_id)->get();
+        return response([
+           'message' => 'User Favorite books',
+            'data' =>OneFavoriteResource::collection($baskets)
+        ]);
+    }
+    
     public function store(StoreBasketRequest $r){
         $user_id=auth()->user()->id;
         $r->validated();
@@ -26,14 +35,7 @@ class FavoriteController extends Controller
         'message' => 'Favorite created successfully',
        ], 201);
     }
-    public function index(){
-        $user_id=auth()->user()->id;
-        $baskets=Favorite::where('user_id',$user_id)->get();
-        return response([
-           'message' => 'User Favorite books',
-            'data' =>OneFavoriteResource::collection($baskets)
-        ]);
-    }
+    
 
     public function destroy($id){
         $user_id=auth()->user()->id;

@@ -52,6 +52,7 @@ class DatabaseSeeder extends Seeder
 
        //order->buyrutma
         Permission::create(['name'=>'order update']);
+        Permission::create(['name'=>'order view']);
 
         //favorite->yoqganlari
         Permission::create(['name'=>'favorite view']);

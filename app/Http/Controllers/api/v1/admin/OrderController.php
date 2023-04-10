@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\UpdateOrderRequest;
+use App\Http\Resources\Order\OneOrderResource;
 use App\Models\Basket;
 use App\Models\Order;
 use App\Models\User;
@@ -18,7 +19,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        
+        $orders=Order::all();
+        return response([
+            'message' => 'all orders',
+            'data' => OneOrderResource::collection($orders)
+        ]);
     }
 
     

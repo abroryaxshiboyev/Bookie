@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     //userEdit
     Route::post('userimage',[UserController::class,'storeImage']);
+    Route::put('user',[UserController::class,'update']);
 
     //Admin
     Route::post('admin',[AdminController::class,'store'])->can('admin create');
@@ -72,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function(){
      Route::get('favorite',[FavoriteController::class,'index']);
 
     //Order
+    Route::get('order',[OrderController::class,'index'])->can('order view');
     Route::post('order',[OrderController::class,'store']);
     Route::delete('order/{id}',[OrderController::class,'destroy'])->can('order update');
     Route::put('order/{id}',[OrderController::class,'update'])->can('order update');
@@ -81,7 +83,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('review/{id}',[ReviewController::class,'destroy']);
     Route::put('review/{id}',[ReviewController::class,'update']);
 
-    Route::get('order',[OrderController::class,'index'])->can('order view');
+    
 
     //Image
     Route::post('upload',[ImageController::class,'store']);
