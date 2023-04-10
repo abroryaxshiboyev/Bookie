@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $category=Category::paginate($r->input('limit'));
         return response([
-            'message'=>"all catgegories",
+            'message'=>"all categories",
             'data'=>OneCategoryResource::collection($category)
         ]);
     }

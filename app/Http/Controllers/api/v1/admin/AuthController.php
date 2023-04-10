@@ -24,9 +24,11 @@ class AuthController extends Controller
             'password' =>Hash::make($request->password)
         ]);
         $user->assignRole('user');
+        $tokenResult = $user->createToken('token')->plainTextToken;
         return response()->json([
             'message' =>'Registration successful',
-            'data' =>new UserResource($user)
+            'data' =>new UserResource($user),
+            'token'=>$tokenResult
         ],200);
     }
     public function login(CheckUserRequest $request){
