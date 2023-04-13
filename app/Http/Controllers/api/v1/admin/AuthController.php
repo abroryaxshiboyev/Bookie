@@ -27,7 +27,9 @@ class AuthController extends Controller
         $tokenResult = $user->createToken('token')->plainTextToken;
         return response()->json([
             'message' =>'Registration successful',
-            'data' =>new UserResource($user),
+            'data' =>[
+                'user'=>new UserResource($user)
+            ],
             'token'=>$tokenResult
         ],200);
     }
@@ -38,9 +40,11 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized!'], 401);
         }
         $tokenResult = $request->user()->createToken('token')->plainTextToken;
-        return response()->json(['data' => [
-            'user' => new UserResource(Auth::user()),
-            'token' => $tokenResult
+        return response()->json([
+            'message'=>'login successful',
+            'data' => [
+                'user' => new UserResource(Auth::user()),
+                'token' => $tokenResult
         ]]); 
     } 
     public function check(Request $request)
