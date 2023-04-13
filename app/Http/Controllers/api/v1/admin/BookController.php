@@ -121,8 +121,8 @@ class BookController extends Controller
                 ]);
             }
             $book->update($result);
-            if(isset($request->categories_id))
-                $book->categories()->sync([$request->categories_id]);
+            if(isset($request->category_id))
+                $book->categories()->sync([$request->category_id]);
             return response([
                 'message'=>'book updated succsesfull',
                 'data'=>new OneBookResource($book)
