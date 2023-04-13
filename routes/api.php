@@ -55,14 +55,14 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('book/{id}',[BookController::class,'destroy'])->can('book delete');
 
     //Discount
-    Route::post('discount',[DiscountController::class,'store']);
-    Route::put('discount/{id}',[DiscountController::class,'update']);
-    Route::delete('discount/{id}',[DiscountController::class,'destroy']);
+    Route::post('discount',[DiscountController::class,'store'])->can('discount create');
+    Route::put('discount/{id}',[DiscountController::class,'update'])->can('discount update');
+    Route::delete('discount/{id}',[DiscountController::class,'destroy'])->can('discount delete');
 
     //DiscBook
-    Route::post('discbook',[DiscbookController::class,'store']);
-    Route::put('discbook/{id}',[DiscbookController::class,'update']);
-    Route::delete('discbook/{id}',[DiscbookController::class,'destroy']);
+    Route::post('discbook',[DiscbookController::class,'store'])->can('discbook create');
+    Route::put('discbook/{id}',[DiscbookController::class,'update'])->can('discbook update');
+    Route::delete('discbook/{id}',[DiscbookController::class,'destroy'])->can('discbook deelete');
 
     //DubAuthor
     Route::post('dubauthor',[DubAuthorController::class,'store'])->can('dubauthor create');
@@ -92,8 +92,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     //Review
     Route::post('review',[ReviewController::class,'store']);
-    Route::delete('review/{id}',[ReviewController::class,'destroy']);
-    Route::put('review/{id}',[ReviewController::class,'update']);
+    // Route::delete('review/{id}',[ReviewController::class,'destroy']);
+    // Route::put('review/{id}',[ReviewController::class,'update']);
 
     
 
