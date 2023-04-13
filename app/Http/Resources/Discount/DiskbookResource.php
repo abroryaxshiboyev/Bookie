@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Category;
+namespace App\Http\Resources\Discount;
 
-use App\Http\Resources\Book\OneBookResource;
-use App\Models\Category;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OneCategoryResource extends JsonResource
+class DiskbookResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,14 +12,12 @@ class OneCategoryResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public $collects=CategoryBookResource::class;
     public function toArray($request)
     {
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'books'=>CategoryBookResource::collection($this->books),
-            'books_total'=>$this->books_total,
+            
         ];
     }
 }

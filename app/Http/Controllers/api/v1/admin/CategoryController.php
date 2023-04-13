@@ -5,8 +5,10 @@ namespace App\Http\Controllers\api\v1\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Http\Resources\Category\AllCategoryResource;
 use App\Http\Resources\Category\OneCategoryResource;
 use App\Models\Category;
+use Countable;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -18,10 +20,10 @@ class CategoryController extends Controller
      */
     public function index(Request $r)
     {
-        $category=Category::paginate($r->input('limit'));
+        $category=Category::where('category_id',null)->paginate($r->input('limit'));
         return response([
             'message'=>"all categories",
-            'data'=>OneCategoryResource::collection($category)
+            'data'=>AllCategoryResource::collection($category)
         ]);
     }
 
@@ -46,9 +48,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $r)
     {
         $category=Category::find($id);
+        $count=$category->books();
+        $category->setRelation('books', 
+            $count->orderBy('id')->paginate($r->input('limit'))
+        );
+        $category['books_total']=$count->count();
         if(isset($category))
         {
             return response([

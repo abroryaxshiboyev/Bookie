@@ -15,6 +15,8 @@ class Book extends Model
         'author_name',
         'title',
         'price',
+        'rating',
+        'click'
     ];
 
     public function categories()
@@ -35,4 +37,5 @@ class Book extends Model
         return $this->hasMany(Audio::class);
     }
 
+    
 }

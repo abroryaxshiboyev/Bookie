@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('author_name');
             $table->text('title');
             $table->biginteger('price');
+            $table->double('rating')->nullable();
+            $table->bigInteger('click')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

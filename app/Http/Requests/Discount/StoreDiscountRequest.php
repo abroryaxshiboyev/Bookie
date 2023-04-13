@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Discount;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class StoreDiscountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:categories,name',
-            'category_id'=>'nullable|exists:categories,id'
+            'name'=>'required|string|max:255|unique:discounts,name',
+            'amount'=>'required|integer|min:1|max:100',
+            'starts'=>'required|date',
+            'finishes'=>'required|date'
         ];
     }
 }

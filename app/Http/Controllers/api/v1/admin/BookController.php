@@ -14,11 +14,22 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function recommendation(Request $request){
+        $book=Book::orderBy('rating','desc')->paginate($request->input('limit'));
+        return response([
+            'message'=>"all recommendation books",
+            'data'=>OneBookResource::collection($book)
+        ]);
+    }
+
+    public function popular(Request $request){
+        $book=Book::orderBy('click','desc')->paginate($request->input('limit'));
+        return response([
+            'message'=>"all popular books",
+            'data'=>OneBookResource::collection($book)
+        ]);
+    }
+
     public function index(Request $r)
     {
         $book=Book::paginate($r->input('limit'));
@@ -68,6 +79,9 @@ class BookController extends Controller
         $book=Book::find($id);
         if(isset($book))
         {
+            $book->update([
+                'click'=>$book->click+1
+            ]);
             return response([
                 'message'=>'one category',
                 'data'=>new OneBookResource($book)

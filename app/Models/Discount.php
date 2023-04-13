@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Discount extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'name',
+        'amount',
+        'starts',
+        'finishes',
+    ];
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class,'discbooks')->as('books')->withTrashed();
+    }
 }

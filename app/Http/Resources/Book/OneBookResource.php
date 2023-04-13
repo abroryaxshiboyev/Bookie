@@ -24,6 +24,7 @@ class OneBookResource extends JsonResource
             'categories'=>BookCategoryResource::collection($this->categories),
             'image'=>$this->photo->file?? null,
             'audio'=>$this->audios->first()->url?? null,
+            'rating'=>$this->rating,
         ];
     }
 }

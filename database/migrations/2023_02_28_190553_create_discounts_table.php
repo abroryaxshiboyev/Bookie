@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->double('amount');
+            $table->timestamp('starts');
+            $table->timestamp('finishes');
             $table->softDeletes();
             $table->timestamps();
         });

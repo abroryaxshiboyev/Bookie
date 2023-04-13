@@ -5,6 +5,8 @@ use App\Http\Controllers\api\v1\admin\AudioController;
 use App\Http\Controllers\api\v1\admin\AuthController;
 use App\Http\Controllers\api\v1\admin\BookController;
 use App\Http\Controllers\api\v1\admin\CategoryController;
+use App\Http\Controllers\api\v1\admin\DiscbookController;
+use App\Http\Controllers\api\v1\admin\DiscountController;
 use App\Http\Controllers\api\v1\admin\DubAuthorController;
 use App\Http\Controllers\api\v1\admin\ImageController;
 use App\Http\Controllers\api\v1\admin\OrderController;
@@ -51,6 +53,16 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('book',[BookController::class,'store'])->can('book create');
     Route::put('book/{id}',[BookController::class,'update'])->can('book update');
     Route::delete('book/{id}',[BookController::class,'destroy'])->can('book delete');
+
+    //Discount
+    Route::post('discount',[DiscountController::class,'store']);
+    Route::put('discount/{id}',[DiscountController::class,'update']);
+    Route::delete('discount/{id}',[DiscountController::class,'destroy']);
+
+    //DiscBook
+    Route::post('discbook',[DiscbookController::class,'store']);
+    Route::put('discbook/{id}',[DiscbookController::class,'update']);
+    Route::delete('discbook/{id}',[DiscbookController::class,'destroy']);
 
     //DubAuthor
     Route::post('dubauthor',[DubAuthorController::class,'store'])->can('dubauthor create');
@@ -100,6 +112,8 @@ Route::get('category',[CategoryController::class,'index']);
 Route::get('category/{id}',[CategoryController::class,'show']);
 
 //Book
+Route::get('book_rating',[BookController::class,'recommendation']);
+Route::get('book_click',[BookController::class,'popular']);
 Route::get('book',[BookController::class,'index']);
 Route::get('book/{id}',[BookController::class,'show']);
 
@@ -107,6 +121,6 @@ Route::get('book/{id}',[BookController::class,'show']);
 Route::get('dubauthor',[DubAuthorController::class,'index']);
 Route::get('dubauthor/{id}',[DubAuthorController::class,'show']);
 
-
-//upload image
-
+//Discount
+Route::get('discount',[DiscountController::class,'index']);
+Route::get('discount/{id}',[DiscountController::class,'show']);
