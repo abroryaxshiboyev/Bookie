@@ -30,6 +30,7 @@ class OrderController extends Controller
     public function store()
     {
         $user_id=auth()->user()->id;
+        
         $basket=Basket::where('user_id',$user_id);
         $baskets=$basket->pluck('book_id')->toarray();
         if(count($baskets)!=0){
@@ -48,7 +49,6 @@ class OrderController extends Controller
                 'message'=>"there are no books in the basket"
             ],404);
         }    
-        
     }
 
     public function update($id)
