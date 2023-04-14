@@ -28,9 +28,10 @@ class AuthController extends Controller
         return response()->json([
             'message' =>'Registration successful',
             'data' =>[
-                'user'=>new UserResource($user)
+                'user'=>new UserResource($user),
+                'token'=>$tokenResult
             ],
-            'token'=>$tokenResult
+            
         ],200);
     }
     public function login(CheckUserRequest $request){
