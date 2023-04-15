@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'phone'=>$this->phone,
-            'image'=>asset('/storage/images/'.$this->photo->file) ?? null,
+            'image'=>$this->photo->file ?? null,
             'role'=>$this->roles[0]->name
         ];
     }

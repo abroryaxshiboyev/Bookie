@@ -16,7 +16,8 @@ class AudioController extends Controller
         if ($file = $request->file('audio')) {
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();
-            $file->storeAs('public/audios/', $name);
+            // $file->storeAs('public/audios/', $name);
+            $request->audio->move(public_path('/audios'),$name);
         }
         $result['url']=$name;
         $audio=Audio::create($result);
@@ -34,7 +35,9 @@ class AudioController extends Controller
             if ($file = $request->file('audio')) {
                 $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
                 $name = $folder.time() . $file->getClientOriginalName();
-                $file->storeAs('public/audios/', $name);
+                // $file->storeAs('public/audios/', $name);
+                $request->audio->move(public_path('/audios'),$name);
+
                 $b=true;
             }
             if($b)

@@ -50,7 +50,7 @@ class BookController extends Controller
         $b=false;
         if ($file = $request->file('image')) {
             $name = time() . $file->getClientOriginalName();
-            $file->storeAs('public/images/', $name); 
+            $request->image->move(public_path('/images'),$name);
             $b=true; 
         }
         $result=$request->validated();
@@ -108,13 +108,16 @@ class BookController extends Controller
             $b=false;
             if ($file = $request->file('image')) {
                 $name = time() . $file->getClientOriginalName();
-                $file->storeAs('public/images/', $name);  
+                // $file->storeAs('public/images/', $name);
+                $request->image->move(public_path('/images'),$name);
+
                 $b=true;
             }
             $result=$request->validated();
             if($b)
             {
-                Storage::delete("public/images/".$book->photo->file);
+                // Storage::delete("public/images/".$book->photo->file);
+                unlink('images/'.$book->photo->file);
                 $book->photo()->delete();
                 $book->photo()->create([
                     'file'=>$name,

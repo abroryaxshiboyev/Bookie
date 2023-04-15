@@ -18,7 +18,8 @@ class UserController extends Controller
         if ($file = $request->file('image')) {
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();
-            $file->storeAs('public/images/', $name);
+            // $file->storeAs('public/images/', $name);
+            $request->image->move(public_path('/images'),$name);
             
         }
         $user->photo()->create([
@@ -36,13 +37,15 @@ class UserController extends Controller
         if ($file = $request->file('image')) {
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();
-            $file->storeAs('public/images/',$name);
+            // $file->storeAs('public/images/',$name);
+            $request->image->move(public_path('/images'),$name);
             $b=true;
         }
         $result=$request->validated();
         if($user->photo)
         {
-            Storage::delete("public/images/".$user->photo->file);
+            // Storage::delete("public/images/".$user->photo->file);
+            unlink("images/".$user->photo->file);
             $user->photo()->delete();
         }
         if($b){
