@@ -29,7 +29,7 @@ class UpdateBookRequest extends FormRequest
             'author_name'=>'string',
             'title'=>'string',
             'price'=>'integer',
-            'image'=>'nullable|mimes:jpeg,jpg,png,gif'
+            'image'=>'nullable|mimes:jpeg,jpg,png,gif,webp'
         ];
     }
 }
