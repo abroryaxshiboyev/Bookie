@@ -36,7 +36,7 @@ class UserController extends Controller
         if ($file = $request->file('image')) {
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();
-            $file->storeAs('public/images/', $name);
+            $file->storeAs('public/images/',$name);
             $b=true;
         }
         $result=$request->validated();
