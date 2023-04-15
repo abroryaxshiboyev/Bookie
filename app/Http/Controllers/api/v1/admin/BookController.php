@@ -114,11 +114,13 @@ class BookController extends Controller
                 $b=true;
             }
             $result=$request->validated();
-            if($b)
+            if($book->photo)
             {
                 // Storage::delete("public/images/".$book->photo->file);
                 unlink('images/'.$book->photo->file);
                 $book->photo()->delete();
+            }
+            if($b){
                 $book->photo()->create([
                     'file'=>$name,
                 ]);
