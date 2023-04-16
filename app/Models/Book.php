@@ -37,5 +37,16 @@ class Book extends Model
         return $this->hasMany(Audio::class);
     }
 
-    
+    public function basket(){
+        if(auth()->user())
+            return $this->hasMany(Basket::class)->where('user_id',auth()->user()->id);
+        else
+            return $this->hasMany(Basket::class)->where('user_id',0);
+    }
+    public function favorite(){
+        if(auth()->user())
+            return $this->hasMany(Favorite::class)->where('user_id',auth()->user()->id);
+        else
+            return $this->hasMany(Favorite::class)->where('user_id',0);
+    }
 }

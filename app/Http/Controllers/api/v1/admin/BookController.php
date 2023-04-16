@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Requests\Book\UpdateBookRequest;
 use App\Http\Resources\Book\OneBookResource;
+use App\Http\Resources\Book\UserBooksResource;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\CategoryBook;
@@ -18,7 +19,7 @@ class BookController extends Controller
         $book=Book::orderBy('rating','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all recommendation books",
-            'data'=>OneBookResource::collection($book)
+            'data'=>UserBooksResource::collection($book)
         ]);
     }
 
@@ -26,7 +27,14 @@ class BookController extends Controller
         $book=Book::orderBy('click','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all popular books",
-            'data'=>OneBookResource::collection($book)
+            'data'=>UserBooksResource::collection($book)
+        ]);
+    }
+    public function newbooks(Request $request){
+        $book=Book::orderBy('id','desc')->paginate($request->input('limit'));
+        return response([
+            'message'=>"all new books",
+            'data'=>UserBooksResource::collection($book)
         ]);
     }
 
@@ -35,9 +43,60 @@ class BookController extends Controller
         $book=Book::paginate($r->input('limit'));
         return response([
             'message'=>"all books",
-            'data'=>OneBookResource::collection($book)
+            'data'=>UserBooksResource::collection($book)
         ]);
     }
+
+    public function index_user(Request $r)
+    {
+        $book=Book::paginate($r->input('limit'));
+        return response([
+            'message'=>"all books",
+            'data'=>UserBooksResource::collection($book)
+        ]);
+    }
+    public function recommendation_user(Request $request){
+        $book=Book::orderBy('rating','desc')->paginate($request->input('limit'));
+        return response([
+            'message'=>"all recommendation books",
+            'data'=>UserBooksResource::collection($book)
+        ]);
+    }
+
+    public function popular_user(Request $request){
+        $book=Book::orderBy('click','desc')->paginate($request->input('limit'));
+        return response([
+            'message'=>"all popular books",
+            'data'=>UserBooksResource::collection($book)
+        ]);
+    }
+    public function newbooks_user(Request $request){
+        $book=Book::orderBy('id','desc')->paginate($request->input('limit'));
+        return response([
+            'message'=>"all new books",
+            'data'=>UserBooksResource::collection($book)
+        ]);
+    }
+    public function show_user($id)
+    {
+        $book=Book::find($id);
+        if(isset($book))
+        {
+            $book->update([
+                'click'=>$book->click+1
+            ]);
+            return response([
+                'message'=>'one category',
+                'data'=>new UserBooksResource($book)
+            ]);
+        }
+        else {
+            return response([
+                'message'=>'id not found'
+            ],404);
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.
