@@ -20,6 +20,7 @@ class OneFavoriteResource extends JsonResource
             'author_name'=>$this->book->author_name,
             'title'=>$this->book->title,
             'price'=>$this->book->price,
+            'image'=>$this->book->photo->file ?? null
         ];
     }
 }
