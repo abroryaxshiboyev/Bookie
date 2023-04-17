@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Review\StoreReviewRequest;
+use App\Http\Resources\Review\BookCommentsResource;
 use App\Models\Book;
 use App\Models\Order;
 use App\Models\Review;
@@ -51,6 +52,21 @@ class ReviewController extends Controller
             return response([
                 'message' =>'You have not purchased this book',
             ]);   
+        }
+    }
+
+    public function index(Request $r,$id){
+        $book=Book::find($id);
+        if(isset($book)){
+            $comments=Review::orderBy('id','desc')->where('book_id',$id)->paginate($r->input('limit'));
+            return response([
+                'message'=>'all book comments',
+                'data'=>BookCommentsResource::collection($comments)
+            ]);
+        }else{
+            return response([
+                'message'=>'id not found',
+            ],404);
         }
     }
 }

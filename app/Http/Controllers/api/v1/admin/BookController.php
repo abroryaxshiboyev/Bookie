@@ -97,6 +97,23 @@ class BookController extends Controller
         }
     }
 
+    public function book_rating_click($id){
+        $book=Book::find($id);
+        if(isset($book)){
+            return response([
+                'message'=>'rating click',
+                'data'=>[
+                    'rating'=>$book->rating,
+                    'clicks'=>$book->click
+                ]
+            ]);
+        }else {
+            return response([
+                'message'=>'id not found'
+            ],404);
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.

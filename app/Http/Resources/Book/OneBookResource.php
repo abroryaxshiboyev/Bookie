@@ -27,7 +27,6 @@ class OneBookResource extends JsonResource
             'rating'=>$this->rating,
             'baskets'=>count($this->basket),
             'favorite'=>count($this->favorite),
-            'comments'=>count($this->comments)
         ];
     }
 }

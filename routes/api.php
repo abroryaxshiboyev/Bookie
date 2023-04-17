@@ -133,6 +133,7 @@ Route::get('book_click',[BookController::class,'popular']);
 Route::get('book_new',[BookController::class,'newbooks']);
 Route::get('book',[BookController::class,'index']);
 Route::get('book/{id}',[BookController::class,'show']);
+Route::get('book_rating_click/{id}',[BookController::class,'book_rating_click']);
 
 
 //DubAuthor
@@ -142,3 +143,6 @@ Route::get('dubauthor/{id}',[DubAuthorController::class,'show']);
 //Discount
 Route::get('discount',[DiscountController::class,'index']);
 Route::get('discount/{id}',[DiscountController::class,'show']);
+
+//Comments
+Route::get('comments/{id}',[ReviewController::class,'index']);
