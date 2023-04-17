@@ -143,7 +143,7 @@ class BookController extends Controller
             ]);
             return response([
                 'message'=>'one category',
-                'data'=>new OneBookResource($book)
+                'data'=>new UserBooksResource($book)
             ]);
         }
         else {

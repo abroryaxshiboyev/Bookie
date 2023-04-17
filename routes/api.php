@@ -113,11 +113,27 @@ Route::get('category',[CategoryController::class,'index']);
 Route::get('category/{id}',[CategoryController::class,'show']);
 
 //Book
+// if(auth('sanctum')->check()){
+//     Route::middleware('auth:sanctum')->group(function(){
+//     Route::get('book_rating',[BookController::class,'recommendation']);
+//     Route::get('book_click',[BookController::class,'popular']);
+//     Route::get('book_new',[BookController::class,'newbooks']);
+//     Route::get('book',[BookController::class,'index']);
+//     Route::get('book/{id}',[BookController::class,'show']);
+// });}
+// else{
+//     Route::get('book_rating',[BookController::class,'recommendation']);
+//     Route::get('book_click',[BookController::class,'popular']);
+//     Route::get('book_new',[BookController::class,'newbooks']);
+//     Route::get('book',[BookController::class,'index']);
+//     Route::get('book/{id}',[BookController::class,'show']);
+// }
 Route::get('book_rating',[BookController::class,'recommendation']);
 Route::get('book_click',[BookController::class,'popular']);
 Route::get('book_new',[BookController::class,'newbooks']);
 Route::get('book',[BookController::class,'index']);
 Route::get('book/{id}',[BookController::class,'show']);
+
 
 //DubAuthor
 Route::get('dubauthor',[DubAuthorController::class,'index']);
