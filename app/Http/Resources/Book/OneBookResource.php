@@ -25,6 +25,9 @@ class OneBookResource extends JsonResource
             'image'=>$this->photo->file?? null,
             'audio'=>$this->audios->first()->url?? null,
             'rating'=>$this->rating,
+            'baskets'=>count($this->basket),
+            'favorite'=>count($this->favorite),
+            'comments'=>count($this->comments)
         ];
     }
 }
