@@ -10,6 +10,7 @@ use App\Http\Resources\Book\UserBooksResource;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\CategoryBook;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -100,9 +101,11 @@ class BookController extends Controller
     public function book_rating_click($id){
         $book=Book::find($id);
         if(isset($book)){
+            $users=Review::where('book_id',$id)->get()->count();
             return response([
                 'message'=>'rating click',
                 'data'=>[
+                    'comments_count'=>$users,
                     'rating'=>$book->rating,
                     'clicks'=>$book->click
                 ]
