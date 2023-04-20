@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Http\Resources\Order\OneOrderResource;
 use App\Models\Basket;
@@ -27,9 +28,11 @@ class OrderController extends Controller
     }
 
     
-    public function store()
+    public function store(StoreOrderRequest $request)
     {
+        $request->validated();
         $user_id=auth()->user()->id;
+        // if(isset($request->book_id))
         $basket=Basket::where('user_id',$user_id);
         $baskets=$basket->pluck('book_id')->toarray();
         if(count($baskets)!=0){

@@ -41,6 +41,7 @@ class DiscountController extends Controller
         $discount=Discount::create($request->validated());
         return response([
             'message' => 'discount created successfully',
+            'data'=>new OneDiscountResource($discount)
         ]);
 
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Discbook\StoreDiscbookRequest;
 use App\Http\Requests\Discbook\UpdateDiscbookRequest;
+use App\Http\Resources\Discbook\OneDiscbookResource;
 use App\Models\Discbook;
 use Illuminate\Http\Request;
 
@@ -15,10 +16,11 @@ class DiscbookController extends Controller
 
         $discount=Discbook::where('discount_id',$request->discount_id)->where('book_id',$request->book_id)->first();
         if(!isset($discount)){
-            Discbook::create($result);
+            $discbook=Discbook::create($result);
 
             return response([
-                'message' =>'discbook created successfully'
+                'message' =>'discbook created successfully',
+                'data'=>new OneDiscbookResource($discbook)
             ],201);
 
         }else {

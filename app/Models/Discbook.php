@@ -13,4 +13,11 @@ class Discbook extends Model
         'book_id',
         'discount_id',
     ];
+
+    public function book(){
+        return $this->belongsTo(Book::class);
+    }
+    public function discount(){
+        return $this->belongsTo(Discount::class);
+    }
 }
