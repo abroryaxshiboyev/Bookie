@@ -17,16 +17,16 @@ class ReviewController extends Controller
         $user_id=auth()->user()->id;
         $result['user_id']=$user_id;
         $book_id=$request->book_id;
-        $book=Order::where('user_id',$user_id)->where('book_id',$book_id)->get();
-        if(count($book))
-            $status=$book[0]['status'];
-        else
-            $status=false;
-        if($status)
-        {
-            $review=Review::where('user_id',$user_id)->where('book_id',$book_id)->get();
-            if(!count($review))
-            {
+        // $book=Order::where('user_id',$user_id)->where('book_id',$book_id)->get();
+        // if(count($book))
+        //     $status=$book[0]['status'];
+        // else
+        //     $status=false;
+        // if($status)
+        // {
+            // $review=Review::where('user_id',$user_id)->where('book_id',$book_id)->get();
+            // if(!count($review))
+            // {
                 $review=Review::create($result);
                 $reviews=Review::where('book_id',$book_id)->select('rating')->get();
                 $summa=0;
@@ -41,18 +41,18 @@ class ReviewController extends Controller
                 return response([
                     'message' =>'review created successfully',
                 ]);
-            }
-            else {
-                return response([
-                    'message' =>'you already commented',
-                ]);
-            }
-        }
-        else {
-            return response([
-                'message' =>'You have not purchased this book',
-            ]);   
-        }
+            // }
+            // else {
+            //     return response([
+            //         'message' =>'you already commented',
+            //     ]);
+            // }
+        // }
+        // else {
+        //     return response([
+        //         'message' =>'You have not purchased this book',
+        //     ]);   
+        // }
     }
 
     public function index(Request $r,$id){
