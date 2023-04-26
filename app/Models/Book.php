@@ -26,13 +26,13 @@ class Book extends Model
         return 'posts_index';
     }
 
-    public function toSearchableArray()
-    {
-        return [
-            'name'=>$this->name,
-            'author_name'=>$this->author_name
-        ];
-    }
+    // public function toSearchableArray()
+    // {
+    //     return [
+    //         'name'=>$this->name,
+    //         'author_name'=>$this->author_name
+    //     ];
+    // }
 
     public function categories()
     {
