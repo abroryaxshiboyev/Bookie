@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
+    public function booksearch(Request $request){
+        $books=Book::search($request->input('search'))->paginate($request->input('limit'));
+        return response([
+            'message'=>"all search books",
+            'data'=>[
+                'books'=>UserBooksResource::collection($books),
+                'total'=>$books->total(),
+                ]
+        ]);
+    }
     public function recommendation(Request $request){
         $book=Book::orderBy('rating','desc')->paginate($request->input('limit'));
         return response([

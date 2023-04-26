@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Book extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes,Searchable;
 
     protected $fillable = [
         'name',
@@ -19,6 +20,15 @@ class Book extends Model
         'rating',
         'click'
     ];
+
+
+    public function toSearchableArray()
+    {
+        return [
+            'name'=>$this->name,
+            'author_name'=>$this->author_name
+        ];
+    }
 
     public function categories()
     {

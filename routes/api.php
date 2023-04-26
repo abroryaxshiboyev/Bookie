@@ -95,6 +95,7 @@ Route::middleware('auth:sanctum')->group(function(){
     // Route::delete('review/{id}',[ReviewController::class,'destroy']);
     // Route::put('review/{id}',[ReviewController::class,'update']);
 
+
     Route::get('book_user',[BookController::class,'index_user']);
     Route::get('book_rating_user',[BookController::class,'recommendation_user']);
     Route::get('book_click_user',[BookController::class,'popular_user']);
@@ -128,6 +129,7 @@ Route::get('category/{id}',[CategoryController::class,'show']);
 //     Route::get('book',[BookController::class,'index']);
 //     Route::get('book/{id}',[BookController::class,'show']);
 // }
+Route::get('booksearch',[BookController::class,'booksearch']);
 Route::get('book_rating',[BookController::class,'recommendation']);
 Route::get('book_click',[BookController::class,'popular']);
 Route::get('book_new',[BookController::class,'newbooks']);
