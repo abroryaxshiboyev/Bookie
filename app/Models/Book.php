@@ -21,6 +21,10 @@ class Book extends Model
         'click'
     ];
 
+    public function searchableAs()
+    {
+        return 'posts_index';
+    }
 
     public function toSearchableArray()
     {
