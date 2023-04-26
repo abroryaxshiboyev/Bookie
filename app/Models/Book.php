@@ -10,8 +10,7 @@ use Laravel\Scout\Searchable;
 
 class Book extends Model
 {
-    use HasFactory,SoftDeletes;
-    use Searchable;
+    use HasFactory,SoftDeletes,Searchable;
 
     protected $fillable = [
         'name',
