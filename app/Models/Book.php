@@ -21,18 +21,18 @@ class Book extends Model
         'click'
     ];
 
-    public function searchableAs()
-    {
-        return 'posts_index';
-    }
-
-    // public function toSearchableArray()
+    // public function searchableAs()
     // {
-    //     return [
-    //         'name'=>$this->name,
-    //         'author_name'=>$this->author_name
-    //     ];
+    //     return 'posts_index';
     // }
+
+    public function toSearchableArray()
+    {
+        return [
+            'name'=>$this->name,
+            'author_name'=>$this->author_name
+        ];
+    }
 
     public function categories()
     {
