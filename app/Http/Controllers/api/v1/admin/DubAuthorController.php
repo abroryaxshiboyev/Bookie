@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class DubAuthorController extends Controller
 {
    
-    public function index(Request $r)
+    public function index(Request $request)
     {
-        $dubauthor=Dubauthor::paginate($r->input('limit'));
+        $dubauthor=Dubauthor::paginate($request->input('limit'));
         return response([
             'message'=>"all DubAuthors",
             'data'=>OneDubAuthorResource::collection($dubauthor)
