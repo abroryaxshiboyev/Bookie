@@ -8,7 +8,6 @@ use App\Http\Requests\Category\UpdateCategoryRequest;
 use App\Http\Resources\Category\AllCategoryResource;
 use App\Http\Resources\Category\OneCategoryResource;
 use App\Models\Category;
-use Countable;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

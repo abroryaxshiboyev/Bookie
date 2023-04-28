@@ -8,7 +8,6 @@ use App\Http\Requests\Book\UpdateBookRequest;
 use App\Http\Resources\Book\OneBookResource;
 use App\Http\Resources\Book\UserBooksResource;
 use App\Models\Book;
-use App\Models\Category;
 use App\Models\CategoryBook;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -129,12 +128,7 @@ class BookController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(StoreBookRequest $request)
     {
         $b=false;
@@ -158,12 +152,7 @@ class BookController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
         $book=Book::find($id);
@@ -184,13 +173,6 @@ class BookController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateBookRequest $request, $id)
     {
         $book=Book::find($id);
@@ -229,12 +211,7 @@ class BookController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
         $book=Book::find($id);

@@ -7,7 +7,6 @@ use App\Http\Requests\Audio\StoreAudioRequest;
 use App\Http\Requests\Audio\UpdateAudioRequest;
 use App\Http\Resources\Audio\OneAudioResource;
 use App\Models\Audio;
-use Illuminate\Http\Request;
 
 class AudioController extends Controller
 {

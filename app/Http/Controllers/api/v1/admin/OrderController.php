@@ -5,12 +5,9 @@ namespace App\Http\Controllers\api\v1\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreOneOrderRequest;
 use App\Http\Requests\Order\StoreOrderRequest;
-use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Http\Resources\Order\OneOrderResource;
 use App\Models\Basket;
 use App\Models\Order;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
