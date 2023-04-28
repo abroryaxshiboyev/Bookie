@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Order\StoreOneOrderRequest;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Http\Resources\Order\OneOrderResource;
@@ -32,7 +33,6 @@ class OrderController extends Controller
     {
         $request->validated();
         $user_id=auth()->user()->id;
-        // if(isset($request->book_id))
         $basket=Basket::where('user_id',$user_id);
         $baskets=$basket->pluck('book_id')->toarray();
         if(count($baskets)!=0){
@@ -51,6 +51,26 @@ class OrderController extends Controller
                 'message'=>"there are no books in the basket"
             ],404);
         }    
+    }
+
+    public function storeOne(StoreOneOrderRequest $request){
+        $request->validated();
+        $user_id=auth()->user()->id;
+        $book_id=$request->book_id;
+        $status=Order::where('user_id',$user_id)->where('book_id',$book_id)->first();
+        if($status){
+            return response([
+                'message' =>'You have already placed an order'
+            ]);
+        }else {
+            Order::create([
+                'book_id' =>$book_id,
+                'user_id' =>$user_id
+            ]);
+            return response([
+                'message' =>'order completed successfully'
+            ]);
+        }
     }
 
     public function update($id)
