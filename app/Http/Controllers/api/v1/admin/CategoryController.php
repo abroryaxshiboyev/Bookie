@@ -13,26 +13,17 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $r)
+  
+    public function index(Request $request)
     {
-        $category=Category::where('category_id',null)->paginate($r->input('limit'));
+        $category=Category::where('category_id',null)->paginate($request->input('limit'));
         return response([
             'message'=>"all categories",
             'data'=>AllCategoryResource::collection($category)
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(StoreCategoryRequest $request)
     {
         $category=Category::create($request->validated());
@@ -42,18 +33,13 @@ class CategoryController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id,Request $r)
+    
+    public function show($id,Request $request)
     {
         $category=Category::find($id);
         $count=$category->books();
         $category->setRelation('books', 
-            $count->orderBy('id')->paginate($r->input('limit'))
+            $count->orderBy('id')->paginate($request->input('limit'))
         );
         $category['books_total']=$count->count();
         if(isset($category))
@@ -70,13 +56,7 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(UpdateCategoryRequest $request, $id)
     {
         $category=Category::find($id);
@@ -95,12 +75,7 @@ class CategoryController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         $category=Category::find($id);

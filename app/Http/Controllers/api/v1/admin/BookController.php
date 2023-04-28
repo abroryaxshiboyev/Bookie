@@ -27,6 +27,7 @@ class BookController extends Controller
         ]);
     }
     public function recommendation(Request $request){
+
         $book=Book::orderBy('rating','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all recommendation books",
@@ -49,18 +50,18 @@ class BookController extends Controller
         ]);
     }
 
-    public function index(Request $r)
+    public function index(Request $request)
     {
-        $book=Book::paginate($r->input('limit'));
+        $book=Book::paginate($request->input('limit'));
         return response([
             'message'=>"all books",
             'data'=>UserBooksResource::collection($book)
         ]);
     }
 
-    public function index_user(Request $r)
+    public function index_user(Request $request)
     {
-        $book=Book::paginate($r->input('limit'));
+        $book=Book::paginate($request->input('limit'));
         return response([
             'message'=>"all books",
             'data'=>UserBooksResource::collection($book)

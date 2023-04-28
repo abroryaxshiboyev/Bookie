@@ -14,16 +14,16 @@ use Illuminate\Http\Request;
 
 class BasketController extends Controller
 {
-    public function store(StoreBasketRequest $r){
+    public function store(StoreBasketRequest $request){
         $user_id=auth()->user()->id;
-        $r->validated();
-        $count=count(Basket::where('user_id',$user_id)->where('book_id',$r->book_id)->get());
+        $request->validated();
+        $count=count(Basket::where('user_id',$user_id)->where('book_id',$request->book_id)->get());
         if($count)
             return response([
                 'message' =>'this book is in the cart'
             ],404);
         $basket=Basket::create([
-            'book_id'=>$r->book_id,
+            'book_id'=>$request->book_id,
             'user_id'=>$user_id
         ]);
        return response([

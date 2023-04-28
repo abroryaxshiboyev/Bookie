@@ -55,10 +55,10 @@ class ReviewController extends Controller
         // }
     }
 
-    public function index(Request $r,$id){
+    public function index(Request $request,$id){
         $book=Book::find($id);
         if(isset($book)){
-            $comments=Review::orderBy('id','desc')->where('book_id',$id)->paginate($r->input('limit'));
+            $comments=Review::orderBy('id','desc')->where('book_id',$id)->paginate($request->input('limit'));
             return response([
                 'message'=>'all book comments',
                 'data'=>BookCommentsResource::collection($comments)

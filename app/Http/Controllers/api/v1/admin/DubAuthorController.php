@@ -11,11 +11,7 @@ use Illuminate\Http\Request;
 
 class DubAuthorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index(Request $r)
     {
         $dubauthor=Dubauthor::paginate($r->input('limit'));
@@ -25,12 +21,7 @@ class DubAuthorController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(StoreDubAuthorRequest $request)
     {
         $book=Dubauthor::create($request->validated());
@@ -40,12 +31,7 @@ class DubAuthorController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $dubauthor=Dubauthor::find($id);
@@ -63,13 +49,7 @@ class DubAuthorController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(UpdateDubAuthorRequest $request, $id)
     {
         $category=Dubauthor::find($id);
@@ -87,12 +67,7 @@ class DubAuthorController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
         $dubauthor=Dubauthor::find($id);

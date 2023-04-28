@@ -7,7 +7,6 @@ use App\Http\Requests\Discbook\StoreDiscbookRequest;
 use App\Http\Requests\Discbook\UpdateDiscbookRequest;
 use App\Http\Resources\Discbook\OneDiscbookResource;
 use App\Models\Discbook;
-use Illuminate\Http\Request;
 
 class DiscbookController extends Controller
 {

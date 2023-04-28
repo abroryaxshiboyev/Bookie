@@ -47,11 +47,13 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name'=>'basket create']);
         //review->izoh qoldirish va baho berish
         Permission::create(['name'=>'review create']);
+        Permission::create(['name'=>'review view']);
 
         $roleuser->syncPermissions(Permission::all());
 
        //order->buyrutma
         Permission::create(['name'=>'order update']);
+        Permission::create(['name'=>'order delete']);
         Permission::create(['name'=>'order view']);
 
         //favorite->yoqganlari
@@ -60,8 +62,7 @@ class DatabaseSeeder extends Seeder
         //basket->savat
         Permission::create(['name'=>'basket view']);
 
-        //review->izoh qoldirish va baho berish
-        Permission::create(['name'=>'review view']);
+        
 
         //Category
         Permission::create(['name'=>'category create']);

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Basket\StoreBasketRequest;
 use App\Http\Resources\Favorite\OneFavoriteResource;
 use App\Models\Favorite;
-use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
@@ -19,16 +18,16 @@ class FavoriteController extends Controller
         ]);
     }
     
-    public function store(StoreBasketRequest $r){
+    public function store(StoreBasketRequest $request){
         $user_id=auth()->user()->id;
-        $r->validated();
-        $count=count(Favorite::where('user_id',$user_id)->where('book_id',$r->book_id)->get());
+        $request->validated();
+        $count=count(Favorite::where('user_id',$user_id)->where('book_id',$request->book_id)->get());
         if($count)
             return response([
                 'message' =>'this book is in favorites'
             ],404);
-        $basket=Favorite::create([
-            'book_id'=>$r->book_id,
+        Favorite::create([
+            'book_id'=>$request->book_id,
             'user_id'=>$user_id
         ]);
        return response([
