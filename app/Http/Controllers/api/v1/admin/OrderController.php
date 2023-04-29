@@ -26,7 +26,8 @@ class OrderController extends Controller
         $request->validated();
         $user_id=auth()->user()->id;
         $basket=Basket::where('user_id',$user_id);
-        $baskets=$basket->pluck('book_id')->toarray();
+        $baskets=$basket->pluck('book_id
+        ')->toarray();
         if(count($baskets)!=0){
             foreach ($baskets as $value) {
                 Order::create([

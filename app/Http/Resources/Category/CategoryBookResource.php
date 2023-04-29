@@ -20,6 +20,7 @@ class CategoryBookResource extends JsonResource
             'author_name'=>$this->author_name,
             'title'=>$this->title,
             'price'=>$this->price,
+            'categories'=>CategoryCategoryResource::collection($this->categories),
             'image'=>$this->photo->file?? null,
             'audio'=>$this->audios->first()->url?? null,
             'rating'=>$this->rating,
