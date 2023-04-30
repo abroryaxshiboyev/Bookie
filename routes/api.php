@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function(){
     //Auth
+    Route::get('userabout',[AuthController::class,'userabout']);
     Route::get('check',[AuthController::class,'check']);
     Route::post('logout',[AuthController::class,'logout']);
 
