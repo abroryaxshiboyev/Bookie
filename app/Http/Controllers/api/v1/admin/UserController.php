@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\StoreImageRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function storeImage(Request $request){
+    public function storeImage(StoreImageRequest $request){
 
         $user = Auth::user();
         
@@ -18,15 +19,19 @@ class UserController extends Controller
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();
             // $file->storeAs('public/images/', $name);
-            $request->image->move(public_path('/images'),$name);
-            
+            $request->image->move(public_path('/images'),$name);  
+            $user->photo()->create([
+                'file'=>$name,
+            ]);
+            return response([
+                'message' => 'created image successfully',
+            ]);
+        }else {
+            return response([
+                'message' => 'image not found',
+            ],422);
         }
-        $user->photo()->create([
-            'file'=>$name,
-        ]);
-        return response([
-            'message' => 'created image successfully',
-        ]);
+        
     }
 
     public function update(UpdateUserRequest $request)
