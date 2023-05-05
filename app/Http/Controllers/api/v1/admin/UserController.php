@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function allusers(Request $request){
-        $allusers=User::orderBy('id','desc')->paginate($request->input('limit'));
+        $allusers=User::with('roles')->whereHas('roles', function($query) {
+            $query->where('name', 'user');
+        })->paginate($request->input('limit'));
 
         return response([
             'message' => 'allusers',
