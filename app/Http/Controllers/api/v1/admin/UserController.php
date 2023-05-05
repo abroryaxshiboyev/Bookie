@@ -6,12 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreImageRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function allusers(Request $request){
+        $allusers=User::orderBy('id','desc')->paginate($request->input('limit'));
 
+        return response([
+            'message' => 'allusers',
+            'data'=>UserResource::collection($allusers)
+        ]);
+    }
+    // public function password_edit($id,Request $request){
+
+    // }
     public function storeImage(StoreImageRequest $request){
         $user = Auth::user();
         

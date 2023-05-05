@@ -45,6 +45,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('admin',[AdminController::class,'store'])->can('admin create');
     Route::delete('admin/{id}',[AdminController::class,'destroy'])->can('admin delete');;
 
+    //User
+    Route::get('usersall',[UserController::class,'allusers']);
+    Route::put('userpassword/{id}',[UserController::class,'password_edit']);
+
     //Category
     Route::post('category',[CategoryController::class,'store'])->can('category create');
     Route::put('category/{id}',[CategoryController::class,'update'])->can('category update');
