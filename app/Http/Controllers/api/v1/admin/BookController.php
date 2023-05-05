@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api\v1\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Requests\Book\UpdateBookRequest;
+use App\Http\Resources\Book\AdminBookResource;
+use App\Http\Resources\Book\AdminOneBookResource;
 use App\Http\Resources\Book\OneBookResource;
 use App\Http\Resources\Book\UserBooksResource;
 use App\Models\Book;
@@ -88,6 +90,7 @@ class BookController extends Controller
             'data'=>UserBooksResource::collection($book)
         ]);
     }
+  
     public function show_user($id)
     {
         $book=Book::find($id);
@@ -99,6 +102,31 @@ class BookController extends Controller
             return response([
                 'message'=>'one category',
                 'data'=>new OneBookResource($book)
+            ]);
+        }
+        else {
+            return response([
+                'message'=>'id not found'
+            ],404);
+        }
+    }
+
+    public function newbooks_admin(Request $request){
+        $book=Book::orderBy('id','desc')->paginate($request->input('limit'));
+        return response([
+            'message'=>"all new books",
+            'data'=>AdminBookResource::collection($book)
+        ]);
+    }
+
+    public function show_admin($id)
+    {
+        $book=Book::find($id);
+        if(isset($book))
+        {
+            return response([
+                'message'=>'one category',
+                'data'=>new AdminOneBookResource($book)
             ]);
         }
         else {

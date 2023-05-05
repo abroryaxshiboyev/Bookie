@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function storeImage(StoreImageRequest $request){
 
+    public function storeImage(StoreImageRequest $request){
         $user = Auth::user();
         
         if ($file = $request->file('image')) {

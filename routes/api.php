@@ -54,6 +54,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('book',[BookController::class,'store'])->can('book create');
     Route::put('book/{id}',[BookController::class,'update'])->can('book update');
     Route::delete('book/{id}',[BookController::class,'destroy'])->can('book delete');
+    Route::get('new_book',[BookController::class,'newbooks_admin'])->can('book delete');
+    Route::get('onebook/{id}',[BookController::class,'show_admin'])->can('book delete');
 
     //Discount
     Route::post('discount',[DiscountController::class,'store'])->can('discount create');
