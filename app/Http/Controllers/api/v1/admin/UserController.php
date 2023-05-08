@@ -19,7 +19,8 @@ class UserController extends Controller
 
         return response([
             'message' => 'allusers',
-            'data'=>UserResource::collection($allusers)
+            'data'=>UserResource::collection($allusers),
+            'total'=>$allusers->total()
         ]);
     }
     // public function password_edit($id,Request $request){
