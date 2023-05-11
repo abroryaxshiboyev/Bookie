@@ -32,7 +32,8 @@ class BookController extends Controller
         $book=Book::orderBy('rating','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all recommendation books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
 
@@ -40,14 +41,16 @@ class BookController extends Controller
         $book=Book::orderBy('click','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all popular books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
     public function newbooks(Request $request){
         $book=Book::orderBy('id','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all new books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
 
@@ -56,7 +59,8 @@ class BookController extends Controller
         $book=Book::paginate($request->input('limit'));
         return response([
             'message'=>"all books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
 
@@ -65,14 +69,16 @@ class BookController extends Controller
         $book=Book::paginate($request->input('limit'));
         return response([
             'message'=>"all books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
     public function recommendation_user(Request $request){
         $book=Book::orderBy('rating','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all recommendation books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
 
@@ -80,14 +86,16 @@ class BookController extends Controller
         $book=Book::orderBy('click','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all popular books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
     public function newbooks_user(Request $request){
         $book=Book::orderBy('id','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all new books",
-            'data'=>UserBooksResource::collection($book)
+            'data'=>UserBooksResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
   
@@ -115,7 +123,8 @@ class BookController extends Controller
         $book=Book::orderBy('id','desc')->paginate($request->input('limit'));
         return response([
             'message'=>"all new books",
-            'data'=>AdminBookResource::collection($book)
+            'data'=>AdminBookResource::collection($book),
+            'total'=>$book->total()
         ]);
     }
 

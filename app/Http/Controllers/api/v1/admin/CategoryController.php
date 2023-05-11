@@ -18,7 +18,8 @@ class CategoryController extends Controller
         $category=Category::where('category_id',null)->paginate($request->input('limit'));
         return response([
             'message'=>"all categories",
-            'data'=>AllCategoryResource::collection($category)
+            'data'=>AllCategoryResource::collection($category),
+            'total'=>$category->total()
         ]);
     }
 
