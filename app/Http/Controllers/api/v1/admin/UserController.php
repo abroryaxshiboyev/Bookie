@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function allusers(Request $request){
-        $allusers=User::with('roles')->whereHas('roles', function($query) {
-            $query->where('name', 'user');
-        })->paginate($request->input('limit'));
+        $user=auth()->user();
+        if($user->roles[0]->name!='super-admin'){
+            $allusers=User::with('roles')->whereHas('roles', function($query) {
+                $query->where('name', 'user');
+            })->paginate($request->input('limit'));
+        }else {
+            $allusers=User::paginate($request->input('limit'));
+        }
 
         return response([
             'message' => 'allusers',
