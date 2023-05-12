@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Order;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OneOrderResource extends JsonResource
@@ -25,7 +26,7 @@ class OneOrderResource extends JsonResource
                 'id'=>$this->user->id,
                 'name'=>$this->user->name,
                 'phone'=>$this->user->phone,
-                'image'=>env('APP_URL')."/images/".$this->user->photo->file ?? null,
+                // 'image'=>(User::find($this->user->id)->photo->file) ?? null,
             ],
 
         ];
