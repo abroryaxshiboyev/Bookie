@@ -18,7 +18,7 @@ class AdminBookResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'author_name'=>$this->author_name,
-            'image'=>env('APP_URL')."/images/".$this->photo->file?? null,
+            'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
             'created_at'=>$this->created_at,
         ];
     }
