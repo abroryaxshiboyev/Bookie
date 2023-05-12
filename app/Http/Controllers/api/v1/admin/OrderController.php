@@ -13,10 +13,13 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders=Order::all();
+        $order=Order::orderBy('status','asc')->orderBy('id','asc')->paginate();
+        $order1=Order::where('status',0)->get();
+        $order2=Order::where('status',1)->orderBy('id','desc')->get();
+        $userAndAssociate = $order1->merge($order2);
         return response([
             'message' => 'all orders',
-            'data' => OneOrderResource::collection($orders)
+            'data' => OneOrderResource::collection($userAndAssociate)
         ]);
     }
 
