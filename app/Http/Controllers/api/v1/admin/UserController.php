@@ -68,7 +68,7 @@ class UserController extends Controller
         if($user->photo)
         {
             // Storage::delete("public/images/".$user->photo->file);
-            unlink("images/".$user->photo->file);
+            // unlink("images/".$user->photo->file);
             $user->photo()->delete();
         }
         if($b){

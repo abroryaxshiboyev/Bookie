@@ -16,13 +16,15 @@ class OneOrderResource extends JsonResource
     {
         return [
             'id'=>$this->id,
+            'created_at'=>$this->created_at,
             'book'=>[
                 'id'=>$this->book->id,
                 'name'=>$this->book->name
             ],
             'user'=>[
                 'id'=>$this->user->id,
-                'name'=>$this->user->name
+                'name'=>$this->user->name,
+                'phone'=>$this->user->phone
             ],
 
         ];
