@@ -95,7 +95,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('order',[OrderController::class,'index'])->can('order view');
     Route::post('order',[OrderController::class,'store']);
     Route::post('oneorder',[OrderController::class,'storeOne']);
-    Route::delete('order/{id}',[OrderController::class,'destroy'])->can('order delete');
+    Route::delete('order/{id}',[OrderController::class,'destroy'])->can('order update');
     Route::put('order/{id}',[OrderController::class,'update'])->can('order update');
 
     //Review
