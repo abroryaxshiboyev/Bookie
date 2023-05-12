@@ -12,10 +12,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function abc(){
-        mkdsm;
-    }
-  
+   
     public function index(Request $request)
     {
         $category=Category::where('category_id',null)->paginate($request->input('limit'));

@@ -118,7 +118,6 @@ Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 
 //Catgory
-Route::get('abc',[CategoryController::class,'abc']);
 Route::get('category',[CategoryController::class,'index']);
 Route::get('category/{id}',[CategoryController::class,'show']);
 
