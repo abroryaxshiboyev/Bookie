@@ -24,7 +24,8 @@ class OneOrderResource extends JsonResource
             'user'=>[
                 'id'=>$this->user->id,
                 'name'=>$this->user->name,
-                'phone'=>$this->user->phone
+                'phone'=>$this->user->phone,
+                'image'=>env('APP_URL')."/images/".$this->photo->file ?? null,
             ],
 
         ];
