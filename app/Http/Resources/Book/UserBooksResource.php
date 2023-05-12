@@ -21,8 +21,8 @@ class UserBooksResource extends JsonResource
             'title'=>$this->title,
             'price'=>$this->price,
             'categories'=>BookCategoryResource::collection($this->categories),
-            'image'=>$this->photo->file?? null,
-            'audio'=>$this->audios->first()->url?? null,
+            'image'=>env('APP_URL')."/images/".$this->photo->file?? null,
+            'audio'=>env('APP_URL')."/audios/".$this->audios->first()->url?? null,
             'rating'=>$this->rating,
             'baskets'=>count($this->basket),
             'favorite'=>count($this->favorite)
