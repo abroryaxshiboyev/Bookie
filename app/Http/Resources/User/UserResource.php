@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'phone'=>$this->phone,
-            'image'=>env('APP_URL')."/images/".$this->photo->file ?? null,
+            'image'=> !empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file : null,
             'role'=>$this->roles[0]->name
         ];
     }

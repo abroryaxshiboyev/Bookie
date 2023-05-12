@@ -26,7 +26,7 @@ class OneOrderResource extends JsonResource
                 'id'=>$this->user->id,
                 'name'=>$this->user->name,
                 'phone'=>$this->user->phone,
-                // 'image'=>(User::find($this->user->id)->photo->file) ?? null,
+                // 'image'=>,
             ],
 
         ];
