@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function abc(){
+        mkdsm;
+    }
   
     public function index(Request $request)
     {
