@@ -37,17 +37,18 @@ class CategoryController extends Controller
     public function show($id,Request $request)
     {
         $category=Category::find($id);
-        $count=$category->books();
-        $category->setRelation('books', 
-            $count->orderBy('id')->paginate($request->input('limit'))
-        );
-        $category['books_total']=$count->count();
-        if(isset($category))
-        {
+
+        if (isset($category)) {
+            $count = $category->books();
+            $category->setRelation(
+                'books',
+                $count->orderBy('id')->paginate($request->input('limit'))
+            );
+            $category['books_total'] = $count->count();
             return response([
-                'message'=>'one category',
-                'data'=>new OneCategoryResource($category)
-            ]);
+                    'message' => 'one category',
+                    'data' => new OneCategoryResource($category)
+                ]);
         }
         else {
             return response([
