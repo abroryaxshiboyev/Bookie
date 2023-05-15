@@ -8,18 +8,22 @@ use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Resources\Order\OneOrderResource;
 use App\Models\Basket;
 use App\Models\Order;
+use Illuminate\Http\Request;
+use App\Utils\Paginate;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $order=Order::orderBy('status','asc')->orderBy('id','asc')->paginate();
-        $order1=Order::where('status',0)->get();
-        $order2=Order::where('status',1)->orderBy('id','desc')->get();
-        $userAndAssociate = $order1->merge($order2);
+        $order=Order::orderBy('status','asc')->orderBy('id','asc')->paginate($request->input('limit'));
+        // $order1=Order::where('status',0)->get();
+        // $order2=Order::where('status',1)->orderBy('id','desc')->get();
+        // $userAndAssociate = $order1->merge($order2);
+        // $orders=Paginate::paginate($userAndAssociate,$request->input('limit'));
         return response([
             'message' => 'all orders',
-            'data' => OneOrderResource::collection($userAndAssociate)
+            'data' => OneOrderResource::collection($order),
+            'total'=>$order->total()
         ]);
     }
 
