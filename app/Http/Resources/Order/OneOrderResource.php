@@ -18,6 +18,7 @@ class OneOrderResource extends JsonResource
         return [
             'id'=>$this->id,
             'created_at'=>$this->created_at,
+            'status'=>$this->status,
             'book'=>[
                 'id'=>$this->book->id,
                 'name'=>$this->book->name
