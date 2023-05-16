@@ -92,6 +92,7 @@ Route::middleware('auth:sanctum')->group(function(){
      Route::get('favorite',[FavoriteController::class,'index']);
 
     //Order
+    Route::get('order_user',[OrderController::class,'user_orders']);
     Route::get('order',[OrderController::class,'index'])->can('order view');
     Route::post('order',[OrderController::class,'store']);
     Route::post('oneorder',[OrderController::class,'storeOne']);

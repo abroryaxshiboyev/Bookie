@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreOneOrderRequest;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Resources\Order\OneOrderResource;
+use App\Http\Resources\Order\UserOrderResource;
 use App\Models\Basket;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -13,6 +14,16 @@ use App\Utils\Paginate;
 
 class OrderController extends Controller
 {
+    public function user_orders(Request $request)
+    {
+        $user = auth()->user();
+        $orders=Order::where('user_id',$user->id)->orderBy('status','asc')->paginate($request->input('limit'));
+        return response([
+            'message' => 'all orders',
+            'data' => UserOrderResource::collection($orders),
+            'total'=>$orders->total()
+        ]);
+    }
     public function index(Request $request)
     {
         $order=Order::orderBy('status','asc')->orderBy('id','asc')->paginate($request->input('limit'));
