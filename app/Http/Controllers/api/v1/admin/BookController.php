@@ -255,9 +255,13 @@ class BookController extends Controller
         if(isset($book))
         {
             CategoryBook::where('book_id',$id)->delete();
-            Storage::delete("public/images/".$book->photo->file);
-            $book->photo->delete();
-            $book->delete();
+            // Storage::delete("public/images/".$book->photo->file);
+            if(isset($book->photo->file)){
+                $book->photo->delete();
+                unlink('images/'.$book->photo->file);
+            }
+                $book->delete();
+            
             return response([
                'message'=>'book deleted'
             ]);
