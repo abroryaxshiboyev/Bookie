@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Book;
+namespace App\Http\Resources\Author;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AdminBookResource extends JsonResource
+class OneAuthorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +17,8 @@ class AdminBookResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'author'=>[
-                'id'=>$this->author->id,
-                'name'=>$this->author->name,
-            ],
-            'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
-            'created_at'=>$this->created_at,
+            'books'=>BookAuthorResource::collection($this->books),
+            'books_total'=>$this->books_total,
         ];
     }
 }

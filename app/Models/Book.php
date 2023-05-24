@@ -33,7 +33,9 @@ class Book extends Model
             'author_name'=>$this->author_name
         ];
     }
-
+    public function author(){
+        return $this->belongsTo(Author::class)->withTrashed();
+    }
     public function categories()
     {
         return $this->belongsToMany(Category::class,'category_books')->as('categories')->withTrashed();

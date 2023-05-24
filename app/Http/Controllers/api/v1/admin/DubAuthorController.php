@@ -17,7 +17,8 @@ class DubAuthorController extends Controller
         $dubauthor=Dubauthor::paginate($request->input('limit'));
         return response([
             'message'=>"all DubAuthors",
-            'data'=>OneDubAuthorResource::collection($dubauthor)
+            'data'=>OneDubAuthorResource::collection($dubauthor),
+            'total'=>$dubauthor->total()
         ]);
     }
 

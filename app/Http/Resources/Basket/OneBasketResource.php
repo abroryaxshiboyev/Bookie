@@ -17,7 +17,10 @@ class OneBasketResource extends JsonResource
         return [
             'id'=>$this->book->id,
             'name'=>$this->book->name,
-            'author_name'=>$this->book->author_name,
+            'author'=>[
+                'id'=>$this->author->id,
+                'name'=>$this->author->name,
+            ],
             'title'=>$this->book->title,
             'price'=>$this->book->price,
             'image'=>!empty($this->book->photo->file) ? env('APP_URL')."/images/".$this->book->photo->file:null,

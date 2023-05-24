@@ -17,7 +17,10 @@ class AdminOneBookResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'author_name'=>$this->author_name,
+            'author'=>[
+                'id'=>$this->author->id,
+                'name'=>$this->author->name,
+            ],
             'title'=>$this->title,
             'price'=>$this->price,
             'categories'=>BookCategoryResource::collection($this->categories),

@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\admin\AdminController;
 use App\Http\Controllers\api\v1\admin\AudioController;
 use App\Http\Controllers\api\v1\admin\AuthController;
+use App\Http\Controllers\api\v1\admin\AuthorController;
 use App\Http\Controllers\api\v1\admin\BookController;
 use App\Http\Controllers\api\v1\admin\CategoryController;
 use App\Http\Controllers\api\v1\admin\DiscbookController;
@@ -75,6 +76,12 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('dubauthor',[DubAuthorController::class,'store'])->can('dubauthor create');
     Route::put('dubauthor/{id}',[DubAuthorController::class,'update'])->can('dubauthor update');
     Route::delete('dubauthor/{id}',[DubAuthorController::class,'destroy'])->can('dubauthor delete');
+
+    //Author
+    Route::post('author',[AuthorController::class,'store'])->can('dubauthor create');
+    Route::put('author/{id}',[AuthorController::class,'update'])->can('dubauthor update');
+    Route::delete('author/{id}',[AuthorController::class,'destroy'])->can('dubauthor delete');
+
 
     //Audio
     Route::post('audio',[AudioController::class,'store'])->can('audio create');
@@ -150,6 +157,10 @@ Route::get('book_rating_click/{id}',[BookController::class,'book_rating_click'])
 //DubAuthor
 Route::get('dubauthor',[DubAuthorController::class,'index']);
 Route::get('dubauthor/{id}',[DubAuthorController::class,'show']);
+
+//Author
+Route::get('author',[AuthorController::class,'index']);
+Route::get('author/{id}',[AuthorController::class,'show']);
 
 //Discount
 Route::get('discount',[DiscountController::class,'index']);
