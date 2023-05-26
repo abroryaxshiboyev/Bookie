@@ -49,7 +49,7 @@ class AuthorController extends Controller
             return response([
                 'message'=>'one Author',
                 'data'=>new OneAuthorResource($author),
-                'total'=>$count->total()
+                'total'=>$count->count()
             ]);
         }
         else {
