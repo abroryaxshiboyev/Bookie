@@ -26,7 +26,7 @@ class UpdateBookRequest extends FormRequest
         return [
             'categories_id'=>'exists:categories,id',
             'name'=>'string',
-            'author_name'=>'string',
+            'author_id'=>'exists:authors,id',
             'title'=>'string',
             'price'=>'integer',
             'image'=>'nullable|mimes:jpeg,jpg,png,gif,webp'

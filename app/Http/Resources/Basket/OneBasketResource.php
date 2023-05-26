@@ -18,8 +18,8 @@ class OneBasketResource extends JsonResource
             'id'=>$this->book->id,
             'name'=>$this->book->name,
             'author'=>[
-                'id'=>$this->author->id,
-                'name'=>$this->author->name,
+                'id'=>$this->book->author->id,
+                'name'=>$this->book->author->name,
             ],
             'title'=>$this->book->title,
             'price'=>$this->book->price,

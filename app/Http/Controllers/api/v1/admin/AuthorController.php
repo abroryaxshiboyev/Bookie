@@ -46,10 +46,10 @@ class AuthorController extends Controller
                 'books',
                 $count->orderBy('id')->paginate($request->input('limit'))
             );
-            $category['books_total'] = $count->count();
             return response([
                 'message'=>'one Author',
-                'data'=>new OneAuthorResource($author)
+                'data'=>new OneAuthorResource($author),
+                'total'=>$author->total()
             ]);
         }
         else {
