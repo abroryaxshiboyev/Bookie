@@ -18,7 +18,6 @@ class OneAuthorResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'books'=>BookAuthorResource::collection($this->books),
-            'books_total'=>$this->books_total,
         ];
     }
 }
