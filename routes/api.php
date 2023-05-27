@@ -123,7 +123,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
 //Auth
 Route::post('register',[AuthController::class,'register']);
-Route::post('login',[AuthController::class,'login'])->name('login');
+Route::post('login',[AuthController::class,'login']);
 
 //Catgory
 Route::get('category',[CategoryController::class,'index']);
