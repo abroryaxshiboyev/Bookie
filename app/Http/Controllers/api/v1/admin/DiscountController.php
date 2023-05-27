@@ -39,7 +39,6 @@ class DiscountController extends Controller
     }
 
     public function store(StoreDiscountRequest $request){
-        $discount=Discount::create($request->validated());
         $b=false;
         if ($file = $request->file('image')) {
             $name = time() . $file->getClientOriginalName();
