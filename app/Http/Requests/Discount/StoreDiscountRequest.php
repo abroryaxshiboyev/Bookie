@@ -26,6 +26,7 @@ class StoreDiscountRequest extends FormRequest
         return [
             'name'=>'required|string|max:255|unique:discounts,name',
             'amount'=>'required|integer|min:1|max:100',
+            'image'=>'nullable|mimes:jpeg,jpg,png,gif,webp',
             'starts'=>'required|date',
             'finishes'=>'required|date'
         ];

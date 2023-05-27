@@ -18,6 +18,7 @@ class OneDiscountResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'amount'=>$this->amount,
+            'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
         ];
     }
 }

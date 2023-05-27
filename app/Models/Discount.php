@@ -21,4 +21,7 @@ class Discount extends Model
     {
         return $this->belongsToMany(Book::class,'discbooks')->as('books')->withTrashed();
     }
+    public function photo(){
+        return $this->morphOne(Image::class,'imageable');
+    }
 }

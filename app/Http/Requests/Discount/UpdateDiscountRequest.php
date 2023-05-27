@@ -26,6 +26,7 @@ class UpdateDiscountRequest extends FormRequest
         return [
             'name'=>'string|max:255',
             'amount'=>'integer|min:1|max:100',
+            'image'=>'nullable|mimes:jpeg,jpg,png,gif,webp',
             'starts'=>'date',
             'finishes'=>'date'
         ];

@@ -32,13 +32,27 @@ class DiscountController extends Controller
                     'name'=>$discount->name,
                     'amount'=>$discount->amount,
                     'books'=>DiskbookResource::collection($books)
-                ]
+                ],
+                'total'=>$books->total()
             ]);
         }
     }
 
     public function store(StoreDiscountRequest $request){
         $discount=Discount::create($request->validated());
+        $b=false;
+        if ($file = $request->file('image')) {
+            $name = time() . $file->getClientOriginalName();
+            $request->image->move(public_path('/images'),$name);
+            $b=true; 
+        }
+        $result=$request->validated();
+        $discount=Discount::create($result);
+        $discount=Discount::find($discount->id);
+        if($b)
+            $discount->photo()->create([
+                'file'=>$name,
+            ]);
         return response([
             'message' => 'discount created successfully',
             'data'=>new OneDiscountResource($discount)
@@ -50,6 +64,24 @@ class DiscountController extends Controller
         $result=$request->validated();
         $discount=Discount::find($id);
         if($discount){
+            $b=false;
+            if ($file = $request->file('image')) {
+                $name = time() . $file->getClientOriginalName();
+                // $file->storeAs('public/images/', $name);
+                $request->image->move(public_path('/images'),$name);
+
+                $b=true;
+            }
+            $result=$request->validated();
+            if(isset($discount->photo) && $b)
+            {
+                // Storage::delete("public/images/".$book->photo->file);
+                unlink('images/'.$discount->photo->file);
+                $discount->photo()->delete();
+                $discount->photo()->create([
+                    'file'=>$name,
+                ]);
+            }
             $discount->update($result);
             return response([
                 'message' => 'discount update successfully',

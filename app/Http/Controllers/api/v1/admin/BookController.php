@@ -223,17 +223,16 @@ class BookController extends Controller
                 $b=true;
             }
             $result=$request->validated();
-            if($book->photo)
+            if(isset($book->photo) && $b)
             {
                 // Storage::delete("public/images/".$book->photo->file);
                 unlink('images/'.$book->photo->file);
                 $book->photo()->delete();
-            }
-            if($b){
                 $book->photo()->create([
                     'file'=>$name,
                 ]);
             }
+            
             $book->update($result);
             if(isset($request->categories_id))
                 $book->categories()->sync([$request->categories_id]);
