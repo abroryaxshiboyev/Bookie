@@ -14,7 +14,7 @@ class Book extends Model
 
     protected $fillable = [
         'name',
-        'author_name',
+        'author_id',
         'title',
         'price',
         'rating',
@@ -29,8 +29,7 @@ class Book extends Model
     public function toSearchableArray()
     {
         return [
-            'name'=>$this->name,
-            'author_name'=>$this->author_name
+            'name'=>$this->name
         ];
     }
     public function author(){

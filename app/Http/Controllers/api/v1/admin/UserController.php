@@ -33,7 +33,7 @@ class UserController extends Controller
     // }
     public function storeImage(StoreImageRequest $request){
         $user = Auth::user();
-        
+        $request->validated();
         if ($file = $request->file('image')) {
             $folder=uniqid().'-'.now()->timestamp.uniqid().rand();
             $name = $folder.time() . $file->getClientOriginalName();
