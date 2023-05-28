@@ -39,6 +39,7 @@ class UserController extends Controller
             $name = $folder.time() . $file->getClientOriginalName();
             // $file->storeAs('public/images/', $name);
             $request->image->move(public_path('/images'),$name);  
+            $user->photo()->delete();
             $user->photo()->create([
                 'file'=>$name,
             ]);
@@ -65,13 +66,11 @@ class UserController extends Controller
             $b=true;
         }
         $result=$request->validated();
-        if($user->photo)
+        if(isset($user->photo) && $b)
         {
             // Storage::delete("public/images/".$user->photo->file);
             // unlink("images/".$user->photo->file);
             $user->photo()->delete();
-        }
-        if($b){
             $user->photo()->create([
                 'file'=>$name,
             ]);
