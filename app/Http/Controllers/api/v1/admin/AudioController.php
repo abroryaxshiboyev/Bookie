@@ -5,11 +5,33 @@ namespace App\Http\Controllers\api\v1\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Audio\StoreAudioRequest;
 use App\Http\Requests\Audio\UpdateAudioRequest;
+use App\Http\Resources\Audio\BookAudioResource;
 use App\Http\Resources\Audio\OneAudioResource;
 use App\Models\Audio;
+use App\Models\Book;
+use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\returnSelf;
 
 class AudioController extends Controller
 {
+    public function book_audios($id,Request $request){
+        $book=Book::find($id);
+
+        if(isset($book)){
+            $audios = $book->audios();
+            $count=$audios->count();
+            $book->setRelation(
+                'audios',
+                $audios->orderBy('id')->paginate($request->input('limit'))
+            );
+            return response([
+                'message'=>"audio books",
+                'data'=>new BookAudioResource($book),
+                'total'=>$count
+            ]);
+        }
+    }
     public function store(StoreAudioRequest $request){
         $result=$request->validated();
         if ($file = $request->file('audio')) {

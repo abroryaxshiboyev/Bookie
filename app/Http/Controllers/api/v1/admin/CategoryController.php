@@ -39,12 +39,13 @@ class CategoryController extends Controller
         $category=Category::find($id);
 
         if (isset($category)) {
-            $count = $category->books();
+            $books = $category->books();
+            $count=$books->count();
             $category->setRelation(
                 'books',
-                $count->orderBy('id')->paginate($request->input('limit'))
+                $books->orderBy('id')->paginate($request->input('limit'))
             );
-            $category['books_total'] = $count->count();
+            $category['books_total'] = $count;
             return response([
                     'message' => 'one category',
                     'data' => new OneCategoryResource($category)

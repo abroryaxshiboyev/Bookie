@@ -84,6 +84,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
 
     //Audio
+    Route::get('book_audios/{id}',[AudioController::class,'book_audios']);
     Route::post('audio',[AudioController::class,'store'])->can('audio create');
     Route::put('audio/{id}',[AudioController::class,'update'])->can('audio update');
     Route::delete('audio/{id}',[AudioController::class,'destroy'])->can('audio delete');

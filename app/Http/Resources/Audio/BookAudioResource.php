@@ -2,11 +2,9 @@
 
 namespace App\Http\Resources\Audio;
 
-use App\Http\Resources\Book\BookCategoryResource;
-use App\Http\Resources\DubAuthor\OneDubAuthorResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OneAudioResource extends JsonResource
+class BookAudioResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +17,7 @@ class OneAudioResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'url'=>$this->url,
-            'book'=>new AudiBookResource($this->book),
-            'dubauthor'=>new AudiDubAuthorResource($this->dubauthor),
+            'audios'=>AudioResource::collection($this->audios)
         ];
     }
 }
