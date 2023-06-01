@@ -41,7 +41,7 @@ class AuthController extends Controller
         $input = $request -> validated();
         if(!Auth::attempt($input))
         {
-            return response()->json(['message' => 'Unauthorized!'], 422);
+            return response()->json(['message' => 'Unauthorized!'], 401);
         }
         $tokenResult = $request->user()->createToken('token')->plainTextToken;
         return response()->json([
