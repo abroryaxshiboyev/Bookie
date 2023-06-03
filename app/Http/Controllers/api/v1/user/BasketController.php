@@ -33,9 +33,11 @@ class BasketController extends Controller
     public function index(){
         $user_id=auth()->user()->id;
         $baskets=Basket::where('user_id',$user_id)->get();
+        $summa=Basket::where('user_id',$user_id)->with('book')->get()->sum('book.price');
         return response([
-           'message' => 'User Basket books',
-            'data' =>OneBasketResource::collection($baskets)
+           'message' => "all basket books",
+            'data' =>OneBasketResource::collection($baskets),
+            'summa' =>$summa
         ]);
     }
 
