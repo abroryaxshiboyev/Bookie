@@ -255,10 +255,10 @@ class BookController extends Controller
         {
             CategoryBook::where('book_id',$id)->delete();
             // Storage::delete("public/images/".$book->photo->file);
-            if(isset($book->photo->file)){
-                $book->photo->delete();
-                unlink('images/'.$book->photo->file);
-            }
+            // if(isset($book->photo->file)){
+            //     $book->photo->delete();
+            //     unlink('images/'.$book->photo->file);
+            // }
                 $book->delete();
             
             return response([
