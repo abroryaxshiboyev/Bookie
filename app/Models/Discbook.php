@@ -16,7 +16,7 @@ class Discbook extends Model
     ];
 
     public function book(){
-        return $this->belongsTo(Book::class);
+        return $this->belongsTo(Book::class)->withTrashed();
     }
     public function discount(){
         return $this->belongsTo(Discount::class);
