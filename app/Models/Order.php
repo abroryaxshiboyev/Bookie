@@ -18,7 +18,7 @@ class Order extends Model
     ];
 
     public function book(){
-        return $this->belongsTo(Book::class);
+        return $this->belongsTo(Book::class)->withTrashed();
     }
 
     public function user(){
