@@ -19,6 +19,7 @@ class BookCommentsResource extends JsonResource
             'comment'=>$this->comment,
             'rating'=>$this->rating,
             'user'=>$this->user->name,
+            'user_image'=> !empty($this->user->photo->file) ? env('APP_URL')."/images/".$this->user->photo->file : null,
             'created_at'=>$this->created_at
         ];
     }
