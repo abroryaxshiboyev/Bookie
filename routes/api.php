@@ -119,6 +119,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('book_new_user',[BookController::class,'newbooks_user']);
     Route::get('book_user/{id}',[BookController::class,'show_user']);
     
+    Route::get('category_user/{id}',[CategoryController::class,'show']);
 });
 
 
