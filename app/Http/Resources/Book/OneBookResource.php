@@ -26,7 +26,7 @@ class OneBookResource extends JsonResource
             'price'=>$this->price,
             'categories'=>BookCategoryResource::collection($this->categories),
             'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
-            'audios'=>[!empty($this->audios->first()->url) ? env('APP_URL')."/audios/".$this->audios->first()->url:null],
+            'audios'=>!empty($this->audios->first()->url) ? [new BookAudioResource($this->audios->first())]:[],
             'rating'=>$this->rating,
             'baskets'=>count($this->basket),
             'favorite'=>count($this->favorite),

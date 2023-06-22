@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Category;
 
+
+use App\Http\Resources\Book\BookAudioResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryBookResource extends JsonResource
@@ -25,7 +27,7 @@ class CategoryBookResource extends JsonResource
             'price'=>$this->price,
             'categories'=>CategoryCategoryResource::collection($this->categories),
             'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
-            'audios'=>[!empty($this->audios->first()->url) ? env('APP_URL')."/audios/".$this->audios->first()->url:null],
+            'audios'=>!empty($this->audios->first()->url) ? [new BookAudioResource($this->audios->first())]:[],
             'rating'=>$this->rating,
             'baskets'=>count($this->basket),
             'favorite'=>count($this->favorite)
