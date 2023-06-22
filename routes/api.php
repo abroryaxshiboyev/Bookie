@@ -130,7 +130,9 @@ Route::post('login',[AuthController::class,'login'])->name('login');
 //Catgory
 Route::get('category',[CategoryController::class,'index']);
 if (auth('sanctum')->check()) {
+    Route::middleware('auth:sanctum')->group(function(){
     Route::get('category/{id}', [CategoryController::class, 'show']);
+});
 }
 else{
     Route::get('category/{id}', [CategoryController::class, 'show']);
