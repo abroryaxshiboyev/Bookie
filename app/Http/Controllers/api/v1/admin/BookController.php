@@ -112,7 +112,7 @@ class BookController extends Controller
             if ($userbook) {
                 return response([
                     'message' => 'one category',
-                    'data' => new AdminBookResource($book)
+                    'data' => new AdminOneBookResource($book)
                 ]);
             } else {
                 return response([
