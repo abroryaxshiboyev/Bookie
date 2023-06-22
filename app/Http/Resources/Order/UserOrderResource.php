@@ -18,7 +18,7 @@ class UserOrderResource extends JsonResource
             'id'=>$this->id,
             'created_at'=>$this->created_at,
             'status'=>$this->status,
-            'book'=>OrderBookResource::collection($this->book),
+            'book'=>new OrderBookResource($this->book),
         ];
     }
 }
