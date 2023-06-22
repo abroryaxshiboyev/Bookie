@@ -25,7 +25,7 @@ class AdminOneBookResource extends JsonResource
             'price'=>$this->price,
             'categories'=>BookCategoryResource::collection($this->categories),
             'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
-            'audios'=>!empty($this->audio->first()) ? BookAudioResource::collection($this->audio):[],
+            'audios'=>!empty($this->audios->first()) ? BookAudioResource::collection($this->audios):[],
             'rating'=>$this->rating,
         ];
     }
