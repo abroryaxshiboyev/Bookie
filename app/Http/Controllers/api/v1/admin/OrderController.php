@@ -25,8 +25,7 @@ class OrderController extends Controller
                 'orders' => UserOrderResource::collection($orders),
                 'purchased' => UserOrderResource::collection($purchased)
             ]
-                ,
-            'total'=>$orders->total()
+               
         ]);
     }
     public function index(Request $request)
