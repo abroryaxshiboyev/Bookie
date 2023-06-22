@@ -29,7 +29,7 @@ class UserBooksResource extends JsonResource
                 if (!empty($this->audios->first()->url))
                     return new BookAudioResource($this->audios->first());
                 else
-                    return [];
+                    return ['a'];
             },
             'rating'=>$this->rating,
             'baskets'=>count($this->basket),
