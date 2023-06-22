@@ -129,7 +129,12 @@ Route::post('login',[AuthController::class,'login'])->name('login');
 
 //Catgory
 Route::get('category',[CategoryController::class,'index']);
-Route::get('category/{id}',[CategoryController::class,'show']);
+if (auth('sanctum')->check()) {
+    Route::get('category/{id}', [CategoryController::class, 'show']);
+}
+else{
+    Route::get('category/{id}', [CategoryController::class, 'show']);
+}
 
 //Book
 // if(auth('sanctum')->check()){
