@@ -26,7 +26,7 @@ class UserBooksResource extends JsonResource
             'categories'=>BookCategoryResource::collection($this->categories),
             'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
             'audios' => function () {
-                if ($this->audios->first()->url)
+                if (!empty($this->audios->first()->url))
                     return [new BookAudioResource($this->audios->first())];
                 else
                     return [];
