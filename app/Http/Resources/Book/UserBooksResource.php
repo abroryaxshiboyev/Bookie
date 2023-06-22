@@ -27,7 +27,7 @@ class UserBooksResource extends JsonResource
             'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
             'audios' => function () {
                 if (!empty($this->audios->first()->url))
-                    return [new BookAudioResource($this->audios->first())];
+                    return new BookAudioResource($this->audios->first());
                 else
                     return [];
             },
