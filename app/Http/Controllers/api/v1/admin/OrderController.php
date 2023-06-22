@@ -17,10 +17,15 @@ class OrderController extends Controller
     public function user_orders(Request $request)
     {
         $user = auth()->user();
-        $orders=Order::where('user_id',$user->id)->orderBy('status','asc')->paginate($request->input('limit'));
+        $orders=Order::where('user_id',$user->id)->where('status',false)->get();
+        $purchased=Order::where('user_id',$user->id)->where('status',true)->get();
         return response([
             'message' => 'all orders',
-            'data' => UserOrderResource::collection($orders),
+            'data' => [
+                'orders' => UserOrderResource::collection($orders),
+                'purchased' => UserOrderResource::collection($purchased)
+            ]
+                ,
             'total'=>$orders->total()
         ]);
     }
