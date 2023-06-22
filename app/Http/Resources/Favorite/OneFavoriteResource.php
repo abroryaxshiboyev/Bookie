@@ -26,7 +26,7 @@ class OneFavoriteResource extends JsonResource
             'price'=>$this->book->price,
             'categories'=>FavoriteBookCategoryResource::collection($this->book->categories),
             'image'=>!empty($this->book->photo->file) ? env('APP_URL')."/images/".$this->book->photo->file:null,
-            'audios'=>!empty($this->audios->first()->url) ? [new BookAudioResource($this->audios->first())]:[],
+            'audios'=>!empty($this->audios->first()) ? [new BookAudioResource($this->audios->first())]:[],
             'rating'=>$this->book->rating,
             'baskets'=>count($this->book->basket),
             'favorite'=>count($this->book->favorite),
