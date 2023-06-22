@@ -11,6 +11,7 @@ use App\Http\Resources\Book\OneBookResource;
 use App\Http\Resources\Book\UserBooksResource;
 use App\Models\Book;
 use App\Models\CategoryBook;
+use App\Models\Order;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -101,21 +102,28 @@ class BookController extends Controller
   
     public function show_user($id)
     {
-        $book=Book::find($id);
-        if(isset($book))
-        {
+        $user = auth()->user();
+        $userbook = Order::where('book_id', $id)->where('user_id', $user->id)->first();
+        $book = Book::find($id);
+        if (isset($book)) {
             $book->update([
-                'click'=>$book->click+1
+                'click' => $book->click + 1
             ]);
+            if ($userbook) {
+                return response([
+                    'message' => 'one category',
+                    'data' => new AdminBookResource($book)
+                ]);
+            } else {
+                return response([
+                    'message' => 'one category',
+                    'data' => new OneBookResource($book)
+                ]);
+            }
+        } else {
             return response([
-                'message'=>'one category',
-                'data'=>new OneBookResource($book)
-            ]);
-        }
-        else {
-            return response([
-                'message'=>'id not found'
-            ],404);
+                'message' => 'id not found'
+            ], 404);
         }
     }
 
