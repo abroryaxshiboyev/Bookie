@@ -48,8 +48,10 @@ class CategoryController extends Controller
                     $books->orderBy('price', 'desc');
                 }elseif($filter == "rating"){
                     $books->orderBy('rating', 'desc');
-                }elseif($filter == "recentlyadded"){
+                }elseif($filter == "recentlyAdded"){
                     $books->orderBy('id','desc');
+                }elseif($filter == "moreSeen"){
+                    $books->orderBy('click','desc');
                 }
             }
             $count=$books->count();
