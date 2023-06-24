@@ -40,7 +40,23 @@ class CategoryController extends Controller
 
         if (isset($category)) {
             $books = $category->books();
+            if ($filter = $request->input('filter')) {
+
+                if ($filter == "cheap") {
+                    $books->orderBy('price', 'asc');
+                }elseif($filter == "expensive") {
+                    $books->orderBy('price', 'desc');
+                }elseif($filter == "rating"){
+                    $books->orderBy('rating', 'desc');
+                }elseif($filter == "recentlyadded"){
+                    $books->orderBy('id','desc');
+                }
+            }
             $count=$books->count();
+            // $category->setRelation(
+            //     'books',
+            //     $books->orderBy('id')->paginate($request->input('limit'))
+            // );
             $category->setRelation(
                 'books',
                 $books->orderBy('id')->paginate($request->input('limit'))
