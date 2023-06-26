@@ -29,7 +29,8 @@ class Book extends Model
     public function toSearchableArray()
     {
         return [
-            'name'=>$this->name
+            'name'=>$this->name,
+            'author_name'=>$this->author->name,
         ];
     }
     public function author(){
