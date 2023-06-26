@@ -30,6 +30,7 @@ class Book extends Model
     {
         return [
             'name'=>$this->name,
+            'author'=>$this->author_id,
         ];
     }
     public function author(){
