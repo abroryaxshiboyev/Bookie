@@ -27,6 +27,8 @@ class AdminOneBookResource extends JsonResource
             'image'=>!empty($this->photo->file) ? env('APP_URL')."/images/".$this->photo->file:null,
             'audios'=>!empty($this->audios->first()) ? BookAudioResource::collection($this->audios):[],
             'rating'=>$this->rating,
+            'baskets'=>count($this->basket),
+            'favorite'=>count($this->favorite)
         ];
     }
 }
