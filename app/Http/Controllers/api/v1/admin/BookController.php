@@ -103,7 +103,7 @@ class BookController extends Controller
     public function show_user($id)
     {
         $user = auth()->user();
-        $userbook = Order::where('book_id', $id)->where('user_id', $user->id)->first();
+        $userbook = Order::where('book_id', $id)->where('user_id', $user->id)->where('status',true)->first();
         $book = Book::find($id);
         if (isset($book)) {
             $book->update([
