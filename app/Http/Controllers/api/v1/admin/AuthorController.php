@@ -15,11 +15,18 @@ class AuthorController extends Controller
   
     public function index(Request $request)
     {
-        $dubauthor=Author::get();
+        if($limit=$request->input('limit')){
+            $dubauthor=Author::paginate($limit);  
+            $total=$dubauthor->total();
+        }else{
+            $dubauthor=Author::get();
+            $total=$dubauthor->count();
+        }
+        
         return response([
             'message'=>"all Authors",
             'data'=>AllAuthorResource::collection($dubauthor),
-            'total'=>$dubauthor->count()
+            'total'=>$total
         ]);
     }
 
