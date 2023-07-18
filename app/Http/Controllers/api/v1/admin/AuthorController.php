@@ -15,7 +15,7 @@ class AuthorController extends Controller
   
     public function index(Request $request)
     {
-        $dubauthor=Author::paginate(null);
+        $dubauthor=Author::paginate();
         return response([
             'message'=>"all Authors",
             'data'=>AllAuthorResource::collection($dubauthor),
