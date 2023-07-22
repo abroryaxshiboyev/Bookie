@@ -248,6 +248,7 @@ class BookController extends Controller
             
             if (isset($request->categories_id))
                 $book->categories()->sync([$request->categories_id]);
+            $book=Book::find($id);
             return response([
                 'message' => 'book updated succsesfull',
                 'data' => new OneBookResource($book)
