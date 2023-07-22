@@ -228,6 +228,8 @@ class BookController extends Controller
         $book = Book::find($id);
         if ($book) {
             $result = $request->validated();
+            $book->update($result);
+            $book = Book::find($id);
             $b = false;
             if ($file = $request->file('image')) {
                 $name = time() . $file->getClientOriginalName();
@@ -245,7 +247,7 @@ class BookController extends Controller
                 ]);
             }
 
-            $book->update($result);
+            
             if (isset($request->categories_id))
                 $book->categories()->sync([$request->categories_id]);
             return response([
