@@ -226,6 +226,7 @@ class BookController extends Controller
             if ($file = $request->file('image')) {
                 $name = time() . $file->getClientOriginalName();
                 // $file->storeAs('public/images/', $name);
+                unlink('images/'.$book->photo->file);
                 $request->image->move(public_path('/images'),$name);
 
                 $b=true;
@@ -234,7 +235,7 @@ class BookController extends Controller
             if(isset($book->photo) && $b)
             {
                 // Storage::delete("public/images/".$book->photo->file);
-                unlink('images/'.$book->photo->file);
+                
                 $book->photo()->delete();
                 $book->photo()->create([
                     'file'=>$name,
